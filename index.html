@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Piège Référendaire — Comparatif des 5 directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F0F0D; --ink-2:#191815; --paper:#E9E1CF; --kraft:#CBB993;
+  --gray:#8F8A7D; --red:#8C1D18; --line:rgba(233,225,207,.16);
+  --f-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  --head:112px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--ink); color:var(--paper);
+  font-family:var(--f-mono); font-size:13px;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+
+/* ---------- en-tête ---------- */
+.top{flex:0 0 auto; border-bottom:1px solid var(--line); background:var(--ink-2)}
+.top-in{
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:12px 20px 0;
+}
+.brand{display:flex; align-items:baseline; gap:14px; min-width:0}
+.brand b{
+  font-family:var(--f-display); font-weight:700; text-transform:uppercase;
+  font-size:20px; letter-spacing:.02em; color:#F5F0E3; white-space:nowrap;
+}
+.brand span{font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray); white-space:nowrap}
+@media(max-width:760px){ .brand span{display:none} }
+
+.tools{display:flex; align-items:center; gap:8px; flex:0 0 auto}
+.seg{display:flex; border:1px solid var(--line)}
+.seg button{
+  appearance:none; background:transparent; border:0; cursor:pointer; color:var(--gray);
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  padding:8px 12px; transition:background .15s ease, color .15s ease;
+}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--paper); color:var(--ink)}
+.seg button:hover:not([aria-pressed="true"]){color:var(--paper)}
+.newtab{
+  color:var(--kraft); text-decoration:none; font-size:10.5px; letter-spacing:.16em;
+  text-transform:uppercase; border:1px solid rgba(203,185,147,.4); padding:8px 12px; white-space:nowrap;
+}
+.newtab:hover,.newtab:focus-visible{background:var(--kraft); color:var(--ink)}
+@media(max-width:620px){ .newtab{display:none} }
+
+/* ---------- onglets ---------- */
+[role="tablist"]{
+  display:flex; gap:4px; padding:14px 20px 0; overflow-x:auto; scrollbar-width:none;
+}
+[role="tablist"]::-webkit-scrollbar{display:none}
+[role="tab"]{
+  appearance:none; cursor:pointer; background:transparent; color:var(--gray);
+  border:1px solid var(--line); border-bottom:0;
+  padding:9px 16px 11px; display:flex; align-items:center; gap:10px; white-space:nowrap;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  transition:color .15s ease, background .15s ease, transform .15s ease;
+  position:relative; top:1px;
+}
+[role="tab"]:hover{color:var(--paper); transform:translateY(-2px)}
+[role="tab"][aria-selected="true"]{
+  background:var(--ink); color:#F5F0E3; border-color:var(--line); border-bottom:1px solid var(--ink);
+}
+[role="tab"] .n{color:var(--red)}
+[role="tab"][aria-selected="true"] .n{color:var(--red)}
+[role="tab"] .sw{display:flex; gap:2px}
+[role="tab"] .sw i{width:7px; height:7px; display:block}
+
+/* ---------- description de l'onglet actif ---------- */
+.desc{
+  flex:0 0 auto; padding:10px 20px; border-bottom:1px solid var(--line);
+  display:flex; gap:18px; align-items:baseline;
+  font-size:11.5px; color:var(--gray); line-height:1.6; background:var(--ink);
+}
+.desc b{color:var(--kraft); font-weight:500; letter-spacing:.14em; text-transform:uppercase; font-size:10.5px; white-space:nowrap}
+.desc p{margin:0; flex:1 1 auto; min-width:0}
+.desc .keys{
+  flex:0 0 auto; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(143,138,125,.6);
+  white-space:nowrap;
+}
+@media(max-width:900px){ .desc .keys{display:none} .desc p{display:none} }
+
+/* ---------- scène ---------- */
+.stage{
+  flex:1 1 auto; min-height:0; background:#080807; padding:0;
+  display:flex; justify-content:center; overflow:hidden;
+}
+.panelwrap{position:relative; width:100%; height:100%}
+[role="tabpanel"]{position:absolute; inset:0; display:none; justify-content:center}
+[role="tabpanel"].on{display:flex}
+iframe{
+  border:0; background:#111; height:100%; width:100%;
+  transition:width .25s ease;
+}
+body[data-view="mobile"] iframe{width:400px; box-shadow:0 0 0 1px var(--line)}
+body[data-view="tablet"] iframe{width:820px; box-shadow:0 0 0 1px var(--line)}
+
+:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+</style>
+</head>
+<body data-view="full">
+
+<div class="top">
+  <div class="top-in">
+    <div class="brand">
+      <b>Le Piège Référendaire</b>
+      <span>Comparatif — 5 directions visuelles</span>
+    </div>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Largeur d'aperçu">
+        <button type="button" data-view="full" aria-pressed="true">Pleine</button>
+        <button type="button" data-view="tablet" aria-pressed="false">820</button>
+        <button type="button" data-view="mobile" aria-pressed="false">400</button>
+      </div>
+      <a class="newtab" id="newtab" href="01-kraft.html" target="_blank" rel="noopener">Ouvrir seule ↗</a>
+    </div>
+  </div>
+
+  <div role="tablist" aria-label="Directions visuelles">
+    <button role="tab" id="t1" aria-controls="p1" aria-selected="true"  data-src="01-kraft.html"        data-hash="kraft">
+      <span class="n">01</span> Kraft
+      <span class="sw" aria-hidden="true"><i style="background:#11110F"></i><i style="background:#E9E1CF"></i><i style="background:#CBB993"></i><i style="background:#8C1D18"></i></span>
+    </button>
+    <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1" data-src="02-microfilm.html" data-hash="microfilm">
+      <span class="n">02</span> Microfilm
+      <span class="sw" aria-hidden="true"><i style="background:#0B0B0A"></i><i style="background:#DCD7CB"></i><i style="background:#F3F0E7"></i><i style="background:#8C1D18"></i></span>
+    </button>
+    <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1" data-src="03-bordereau.html" data-hash="bordereau">
+      <span class="n">03</span> Bordereau
+      <span class="sw" aria-hidden="true"><i style="background:#EDE8DC"></i><i style="background:#283B45"></i><i style="background:#14140F"></i><i style="background:#8C1D18"></i></span>
+    </button>
+    <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1" data-src="04-table-enquete.html" data-hash="table">
+      <span class="n">04</span> Table d'enquête
+      <span class="sw" aria-hidden="true"><i style="background:#241F18"></i><i style="background:#CBB993"></i><i style="background:#F2EDDF"></i><i style="background:#8C1D18"></i></span>
+    </button>
+    <button role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1" data-src="05-caviardage.html" data-hash="caviardage">
+      <span class="n">05</span> Caviardage
+      <span class="sw" aria-hidden="true"><i style="background:#0F0F0D"></i><i style="background:#F5F0E3"></i><i style="background:#526052"></i><i style="background:#8C1D18"></i></span>
+    </button>
+  </div>
+</div>
+
+<div class="desc">
+  <b id="desc-label">Direction 01</b>
+  <p id="desc-text">Chemise kraft, feuilles ivoire sur fond charbon, perforations, tampons rouges, parallaxe de couches documentaires. La plus « dossier physique » — et la plus proche du cliché si mal dosée.</p>
+  <span class="keys">← → changer · 1–5 direct</span>
+</div>
+
+<main class="stage">
+  <div class="panelwrap">
+    <div role="tabpanel" id="p1" aria-labelledby="t1" class="on"><iframe title="Direction 01 — Kraft" src="01-kraft.html"></iframe></div>
+    <div role="tabpanel" id="p2" aria-labelledby="t2"><iframe title="Direction 02 — Microfilm" data-src="02-microfilm.html"></iframe></div>
+    <div role="tabpanel" id="p3" aria-labelledby="t3"><iframe title="Direction 03 — Bordereau" data-src="03-bordereau.html"></iframe></div>
+    <div role="tabpanel" id="p4" aria-labelledby="t4"><iframe title="Direction 04 — Table d'enquête" data-src="04-table-enquete.html"></iframe></div>
+    <div role="tabpanel" id="p5" aria-labelledby="t5"><iframe title="Direction 05 — Caviardage" data-src="05-caviardage.html"></iframe></div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var tabs   = [].slice.call(document.querySelectorAll('[role="tab"]'));
+  var panels = tabs.map(function(t){ return document.getElementById(t.getAttribute('aria-controls')); });
+  var newtab = document.getElementById('newtab');
+  var dLabel = document.getElementById('desc-label');
+  var dText  = document.getElementById('desc-text');
+
+  var META = {
+    kraft:      ['Direction 01 — Kraft',           "Chemise kraft, feuilles ivoire sur fond charbon, perforations, tampons rouges, parallaxe de couches documentaires. La plus « dossier physique » — et la plus proche du cliché si mal dosée."],
+    microfilm:  ['Direction 02 — Microfilm',       "Noir et blanc haut contraste, perforations de pellicule sur les bords, index en table de bobine, rouge quasi absent. Fiche 04 en tirage positif inversé. La plus austère, la plus lisible, quasi aucune texture à produire."],
+    bordereau:  ['Direction 03 — Bordereau',       "Fond papier clair, grille technique, numérotation décimale 3.1 / 3.2, index latéral sticky avec suivi de section, bleu institutionnel dominant. La plus crédible et la plus performante pour lire quatre fiches longues."],
+    table:      ["Direction 04 — Table d'enquête", "Documents étalés sur une table de travail : onglets de chemise en navigation, fiches en cartes légèrement pivotées, annotation manuscrite, ombres portées. La plus éditoriale; demande le plus de soin sur mobile."],
+    caviardage: ['Direction 05 — Caviardage',      "Typographie monumentale, barres de caviardage comme rythme de composition, titre qui se dévoile à l'ouverture, fiche 04 « déclassifiée » en vert dossier. Le plus fort impact au premier écran; le caviardage reste décoratif."]
+  };
+
+  function select(i, focus){
+    tabs.forEach(function(t, j){
+      var on = j === i;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      panels[j].classList.toggle('on', on);
+    });
+    var tab = tabs[i];
+    var frame = panels[i].querySelector('iframe');
+    if(!frame.src && frame.dataset.src) frame.src = frame.dataset.src;   // chargement à la demande
+    newtab.href = tab.dataset.src;
+    var m = META[tab.dataset.hash];
+    dLabel.textContent = m[0];
+    dText.textContent  = m[1];
+    if(location.hash.slice(1) !== tab.dataset.hash) history.replaceState(null, '', '#' + tab.dataset.hash);
+    if(focus) tab.focus();
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ select(i); });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if(e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      if(e.key === 'ArrowLeft')  n = (i - 1 + tabs.length) % tabs.length;
+      if(e.key === 'Home')       n = 0;
+      if(e.key === 'End')        n = tabs.length - 1;
+      if(n !== null){ e.preventDefault(); select(n, true); }
+    });
+  });
+
+  // raccourcis globaux : 1–5 et flèches quand le focus n'est pas dans un champ
+  addEventListener('keydown', function(e){
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    var cur = tabs.findIndex(function(t){ return t.getAttribute('aria-selected') === 'true'; });
+    if(/^[1-5]$/.test(e.key)) return select(+e.key - 1);
+    if(document.activeElement && document.activeElement.getAttribute('role') === 'tab') return;
+    if(e.key === 'ArrowRight') select((cur + 1) % tabs.length);
+    if(e.key === 'ArrowLeft')  select((cur - 1 + tabs.length) % tabs.length);
+  });
+
+  // largeur d'aperçu
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.seg button').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      document.body.dataset.view = b.dataset.view;
+    });
+  });
+
+  // ouverture directe via #hash, et synchronisation si le hash change ensuite
+  function fromHash(){
+    var h = location.hash.slice(1);
+    var i = tabs.findIndex(function(t){ return t.dataset.hash === h; });
+    return i > -1 ? i : 0;
+  }
+  addEventListener('hashchange', function(){ select(fromHash()); });
+  select(fromHash());
+})();
+</script>
+</body>
+</html>

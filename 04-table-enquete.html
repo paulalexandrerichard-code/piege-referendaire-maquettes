@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 04 — Table d'enquête · Le Piège Référendaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --desk:#241F18; --kraft:#CBB993; --kraft-dark:#A8956E;
+  --paper:#F2EDDF; --paper-2:#E9E1CF; --ink:#14140F; --ink-2:#413D34;
+  --red:#8C1D18; --red-dark:#5C1110; --green:#526052; --blue:#283B45; --gray:#7C776B;
+  --f-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  --f-read:'Source Serif 4',Georgia,serif;
+  --lift: 3px 5px 0 rgba(36,31,24,.18), 0 22px 40px -24px rgba(36,31,24,.85);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font-family:var(--f-read); font-size:17px; line-height:1.7;
+  background:var(--desk);
+  background-image:
+    radial-gradient(120% 60% at 50% -10%, rgba(203,185,147,.16), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1160px; margin:0 auto; padding:0 26px}
+section{padding:96px 0}
+@media(max-width:640px){ section{padding:64px 0} }
+
+/* barre d'index discrète */
+.bar{
+  position:sticky; top:0; z-index:50; background:rgba(36,31,24,.93); backdrop-filter:blur(5px);
+  border-bottom:1px solid rgba(203,185,147,.22); color:var(--kraft);
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+}
+.bar .in{max-width:1160px; margin:0 auto; padding:10px 26px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+.bar nav{display:flex; gap:16px}
+.bar a{color:rgba(203,185,147,.7); text-decoration:none}
+.bar a:hover,.bar a:focus-visible{color:#F2EDDF}
+@media(max-width:760px){ .bar nav{display:none} }
+
+/* HERO — table de travail */
+.hero{position:relative; padding:110px 0 90px; overflow:hidden}
+.props{position:absolute; inset:0; z-index:1; pointer-events:none}
+.prop{position:absolute; box-shadow:var(--lift); will-change:transform}
+.p-doc1{right:2%; top:6%; width:min(288px,36vw); height:380px; background:var(--paper-2); transform:rotate(4.5deg)}
+.p-doc1::before{content:""; position:absolute; inset:24px 22px auto; height:8px; background:rgba(20,20,15,.14);
+  box-shadow:0 22px 0 rgba(20,20,15,.1),0 44px 0 rgba(20,20,15,.1),0 66px 0 rgba(20,20,15,.1),0 88px 0 rgba(20,20,15,.07),0 110px 0 rgba(20,20,15,.07)}
+.p-photo{right:13%; top:47%; width:min(215px,28vw); height:158px; background:#1A1915; border:9px solid var(--paper);
+  transform:rotate(-6deg);
+  background-image:linear-gradient(140deg,#2c2a24,#0f0f0c);}
+.p-clip{left:-40px; top:20%; width:min(240px,34vw); height:320px; background:var(--kraft); opacity:.35; transform:rotate(-8deg)}
+@media(max-width:900px){ .props{opacity:.4} }
+.hero-inner{position:relative; z-index:2}
+.kicker{
+  display:inline-block; background:var(--red); color:var(--paper);
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+  padding:7px 14px; margin-bottom:26px; transform:rotate(-.6deg);
+}
+h1{
+  font-family:var(--f-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(3rem,9vw,7.6rem); line-height:.86; letter-spacing:-.015em; margin:0;
+  color:var(--paper);
+}
+h1 span{display:block; color:var(--kraft)}
+.hero-sub{max-width:50ch; margin:30px 0 0; color:#D8D1C0; font-size:1.08rem}
+.hero-strip{
+  margin-top:40px; display:flex; gap:8px; flex-wrap:wrap;
+}
+.chip{
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--kraft); border:1px solid rgba(203,185,147,.4); padding:7px 12px;
+}
+.cta{
+  display:inline-flex; align-items:center; gap:14px; margin-top:38px;
+  background:var(--paper); color:var(--ink); text-decoration:none;
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+  padding:15px 26px; box-shadow:4px 4px 0 var(--red);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.cta:hover,.cta:focus-visible{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--red)}
+.cta .arw{transition:transform .18s ease}
+.cta:hover .arw{transform:translateY(3px)}
+
+/* chemise / dossier */
+.folder{position:relative; margin-top:34px}
+.tabs{display:flex; gap:6px; padding-left:26px; flex-wrap:wrap}
+.tab{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  background:var(--kraft-dark); color:#231E16; text-decoration:none;
+  padding:10px 18px 12px; border:1px solid rgba(36,31,24,.25); border-bottom:0;
+  clip-path:polygon(0 0, 92% 0, 100% 100%, 0 100%);
+  transition:background .18s ease, transform .18s ease;
+}
+.tab:hover,.tab:focus-visible{background:var(--kraft); transform:translateY(-3px)}
+.tab.on{background:var(--paper); position:relative; z-index:2}
+.card{
+  background:var(--paper); box-shadow:var(--lift); padding:56px 54px 50px;
+  border:1px solid rgba(36,31,24,.22);
+}
+@media(max-width:640px){ .card{padding:38px 22px 34px} .tabs{padding-left:12px} }
+.card-head{
+  display:flex; flex-wrap:wrap; gap:10px 26px; align-items:baseline; margin-bottom:26px;
+  padding-bottom:14px; border-bottom:1px solid rgba(20,20,15,.2);
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray);
+}
+h2{
+  font-family:var(--f-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(2rem,4.6vw,3.7rem); line-height:.92; letter-spacing:-.006em; margin:0 0 26px; color:var(--ink);
+}
+p{margin:0 0 20px; max-width:66ch}
+strong{font-weight:600; box-shadow:inset 0 -.42em 0 rgba(140,29,24,.18)}
+
+/* annotation crayon */
+.note-hand{
+  position:absolute; right:26px; top:-14px; z-index:3;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.06em; color:var(--red-dark);
+  background:#F7E9B8; padding:9px 14px; transform:rotate(2deg); box-shadow:2px 3px 0 rgba(36,31,24,.25);
+  max-width:220px; line-height:1.5;
+}
+@media(max-width:760px){ .note-hand{display:none} }
+
+/* index en pièces */
+.pile{display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:20px}
+.piece{
+  display:block; text-decoration:none; color:var(--ink); background:var(--paper-2);
+  border:1px solid rgba(36,31,24,.25); padding:26px 24px 22px; box-shadow:var(--lift);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.piece:nth-child(odd){transform:rotate(-.6deg)}
+.piece:nth-child(even){transform:rotate(.5deg)}
+.piece:hover,.piece:focus-visible{transform:translateY(-6px) rotate(0deg); box-shadow:4px 8px 0 rgba(36,31,24,.22), 0 28px 44px -22px rgba(0,0,0,.9)}
+.piece .n{font-family:var(--f-mono); font-size:11px; letter-spacing:.2em; color:var(--red); display:block; margin-bottom:14px}
+.piece .t{font-family:var(--f-display); text-transform:uppercase; font-size:1.5rem; line-height:1.04; display:block; margin-bottom:16px}
+.piece .s{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gray)}
+.sec-title{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--kraft);
+  display:flex; align-items:center; gap:16px; margin:0 0 28px;
+}
+.sec-title::after{content:""; flex:1; height:1px; background:rgba(203,185,147,.32)}
+
+/* accordéon */
+.acc-btn{
+  appearance:none; cursor:pointer; background:var(--ink); color:var(--paper); border:0;
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase;
+  padding:15px 26px; display:inline-flex; align-items:center; gap:14px;
+  box-shadow:3px 3px 0 rgba(36,31,24,.3); transition:transform .18s ease, background .18s ease;
+}
+.acc-btn:hover,.acc-btn:focus-visible{transform:translate(-2px,-2px); background:var(--red)}
+.acc-btn[aria-expanded="true"]{background:var(--red)}
+.chev{transition:transform .25s ease}
+.acc-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.acc-panel{display:grid; grid-template-rows:0fr; transition:grid-template-rows .36s cubic-bezier(.32,.72,.28,1)}
+.acc-panel[data-open="true"]{grid-template-rows:1fr}
+.acc-panel > .inner{overflow:hidden}
+.acc-body{padding-top:38px; margin-top:34px; border-top:2px solid rgba(20,20,15,.18)}
+h3{
+  font-family:var(--f-display); font-weight:600; text-transform:uppercase; letter-spacing:.02em;
+  font-size:1.4rem; margin:34px 0 12px; color:var(--ink);
+}
+h3:first-child{margin-top:0}
+h3 .code{font-family:var(--f-mono); font-size:.62rem; color:var(--paper); background:var(--red);
+  padding:4px 8px; letter-spacing:.14em; margin-right:12px; vertical-align:middle}
+ul{margin:0 0 20px; padding-left:20px; max-width:64ch; color:var(--ink-2)}
+li{margin-bottom:7px}
+.todo{
+  max-width:66ch; margin:0 0 26px; padding:15px 18px; background:#F7E9B8;
+  border:1px dashed rgba(140,29,24,.5); font-family:var(--f-mono); font-size:11.5px; line-height:1.7; color:#5C3B18;
+}
+.pieces-box{margin-top:36px; background:var(--paper-2); border:1px solid rgba(36,31,24,.25); padding:24px 26px}
+.pieces-box h4{margin:0 0 14px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--blue)}
+.pieces-box ol{margin:0; padding-left:20px; font-size:15px; color:var(--ink-2)}
+.pieces-box li{margin-bottom:8px}
+.next{display:inline-block; margin-top:28px; font-family:var(--f-mono); font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--red-dark); text-decoration:none; border-bottom:1px solid rgba(92,17,16,.4)}
+.next:hover,.next:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
+
+/* fiche 04 */
+.f04 .card{background:linear-gradient(168deg,#FBF7EC,#F2EDDF)}
+.f04 .tab.on{background:#FBF7EC}
+.f04 .tab{background:var(--green); color:#EDF0EC}
+.f04 h3 .code{background:var(--green)}
+.f04 .acc-btn[aria-expanded="true"],.f04 .acc-btn:hover{background:var(--green)}
+
+/* clôture */
+.closing{text-align:left}
+.closing .card{background:var(--desk); border-color:rgba(203,185,147,.3); color:var(--paper)}
+.closing h2{color:var(--paper)}
+.closing .card-head{color:rgba(203,185,147,.75); border-bottom-color:rgba(203,185,147,.28)}
+.closing p{color:#D8D1C0}
+.closing .q{
+  font-family:var(--f-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(2rem,6vw,5rem); line-height:.94; margin:30px 0 0; color:var(--paper); max-width:none;
+}
+.closing .q em{font-style:normal; color:#D9635C}
+footer{padding:70px 0 90px; color:rgba(203,185,147,.75)}
+footer .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:32px}
+footer h4{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--kraft); margin:0 0 12px}
+footer ul{list-style:none; padding:0; margin:0; font-size:14.5px; line-height:1.9}
+footer .note{margin-top:44px; font-family:var(--f-mono); font-size:10.5px; line-height:1.9; color:rgba(203,185,147,.5); max-width:74ch}
+
+.rv{opacity:0; transform:translateY(26px); transition:opacity .6s ease, transform .6s ease}
+.rv.in{opacity:1; transform:none}
+:focus-visible{outline:2px solid var(--red); outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important; animation:none !important}
+  .rv{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="in">
+  <span>Table d'enquête · Dossier PQ-2026-03</span>
+  <nav><a href="#synthese">Synthèse</a><a href="#index">Index</a><a href="#fiche-1">01</a><a href="#fiche-2">02</a><a href="#fiche-4">04</a><a href="#sources">Sources</a></nav>
+  <span>4 pièces étalées</span>
+</div></div>
+
+<header class="hero">
+  <div class="props" aria-hidden="true">
+    <div class="prop p-clip" data-depth="8"></div>
+    <div class="prop p-doc1" data-depth="16"></div>
+    <div class="prop p-photo" data-depth="26"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="kicker">Dossier d'analyse — diffusion restreinte</span>
+    <h1>Le piège<span>référendaire</span></h1>
+    <p class="hero-sub">Dossier critique sur la stratégie référendaire et l'effectivité d'un éventuel changement de statut du Québec.</p>
+    <div class="hero-strip">
+      <span class="chip">PQ-2026-03</span><span class="chip">1969 → 2026</span>
+      <span class="chip">04 fiches</span><span class="chip">Sources à verser</span>
+    </div>
+    <a class="cta" href="#synthese">Étaler le dossier <span class="arw">↓</span></a>
+  </div>
+</header>
+
+<section id="synthese">
+  <div class="wrap">
+    <div class="folder rv">
+      <div class="tabs"><span class="tab on">Note de synthèse</span></div>
+      <article class="card">
+        <span class="note-hand">Vérifier chaque renvoi avant publication — sources primaires exigées.</span>
+        <div class="card-head"><span>Feuillet 1/1</span><span>Origine : analyse indépendante</span><span>Rév. 09.08.2026</span></div>
+        <h2>Ce que contient ce dossier</h2>
+        <p>Le Parti québécois s'est engagé à tenir un troisième référendum durant son mandat s'il est élu le 5 octobre 2026. Compte tenu de l'importance de l'enjeu, il convient de soumettre le cadre stratégique péquiste à un examen critique afin de déterminer dans quelle mesure, et à quelles conditions, une éventuelle victoire du Oui mènerait véritablement à un changement de statut effectif du Québec, de province à État souverain.</p>
+        <p>Le présent dossier soutient que le référendum comme voie d'accès à la souveraineté aurait été suggéré à Claude Morin par des acteurs fédéraux en 1969 — <strong>voir Fiche 1</strong> — et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie repose depuis le début sur l'acceptation du résultat par le gouvernement fédéral.</p>
+        <p>Le dossier examine ensuite la thèse selon laquelle cette confiance est contredite par des actions du gouvernement fédéral documentées avant même le référendum de 1980 — <strong>voir Fiche 2</strong>. Il pose alors la question suivante : pourquoi le Parti québécois a-t-il maintenu la même logique stratégique en 1995 malgré l'expérience du premier référendum?</p>
+        <p>Le dossier présente enfin plusieurs conséquences politiques et juridiques associées aux deux premières séquences référendaires — <strong>voir Fiche 3</strong> — notamment la Constitution de 1982, le Renvoi relatif à la sécession du Québec de 1998 et la Loi sur la clarté de 2000.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="index" style="padding-top:0">
+  <div class="wrap rv">
+    <p class="sec-title">Pièces au dossier</p>
+    <div class="pile">
+      <a class="piece" href="#fiche-1"><span class="n">Fiche 01</span><span class="t">Le référendum, suggéré par le fédéral</span><span class="s">Archive 1969 · 4 sources</span></a>
+      <a class="piece" href="#fiche-2"><span class="n">Fiche 02</span><span class="t">Un référendum qui repose sur la bonne foi du fédéral</span><span class="s">Avant 1980 · chronologie</span></a>
+      <a class="piece" href="#fiche-3"><span class="n">Fiche 03</span><span class="t">Les conséquences néfastes sur le droit à l'autodétermination</span><span class="s">1982 · 1998 · 2000</span></a>
+      <a class="piece" href="#fiche-4"><span class="n">Fiche 04</span><span class="t">Sortie du piège : la première voie</span><span class="s">Proposition</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="fiche-1" style="padding-top:0">
+  <div class="wrap">
+    <div class="folder rv">
+      <div class="tabs">
+        <span class="tab on">Fiche 01</span><a class="tab" href="#fiche-2">02</a><a class="tab" href="#fiche-3">03</a><a class="tab" href="#fiche-4">04</a>
+      </div>
+      <article class="card">
+        <div class="card-head"><span>Archive 1969</span><span>Contexte 1968–1970</span><span>Statut : à rédiger</span></div>
+        <h2>Le référendum,<br>suggéré par le fédéral</h2>
+        <p>Le cœur de cette fiche est la thèse selon laquelle l'idée du référendum comme mécanisme central d'accession à la souveraineté aurait été encouragée ou suggérée à Claude Morin dans le contexte politique fédéral de la fin des années 1960.</p>
+        <p>Si le mécanisme a été pensé dans un cadre où Ottawa conservait un rôle déterminant dans la reconnaissance et la mise en œuvre du résultat, il faut examiner les conséquences de cette dépendance stratégique sur toute la suite de l'argument.</p>
+        <button class="acc-btn" aria-expanded="false" aria-controls="p1" data-acc><span class="lbl">Découvrez la suite</span><span class="chev">▾</span></button>
+        <div class="acc-panel" id="p1" data-open="false" role="region" aria-label="Suite de la fiche 01">
+          <div class="inner"><div class="acc-body">
+            <h3><span class="code">A</span>Contexte de 1968–1970</h3>
+            <ul><li>situation politique au Québec;</li><li>montée du mouvement souverainiste;</li><li>rôle de Claude Morin;</li><li>rapport entre stratégie électorale et stratégie constitutionnelle.</li></ul>
+            <p class="todo">TEXTE À RÉDIGER — ne jamais présenter l'origine alléguée comme établie sans source primaire ou secondaire robuste.</p>
+            <h3><span class="code">B</span>Origine de l'idée référendaire</h3>
+            <ul><li>identifier précisément les personnes, documents ou échanges sur lesquels repose l'affirmation;</li><li>distinguer témoignage, interprétation et preuve documentaire;</li><li>expliquer la chronologie.</li></ul>
+            <p class="todo">BLOC CITATION visible à insérer — extrait vérifié et contextualisé.</p>
+            <h3><span class="code">C</span>Pourquoi cette origine compte</h3>
+            <ul><li>mécanisme de consultation populaire;</li><li>absence d'automaticité entre vote et accession à l'indépendance;</li><li>place du fédéral dans la suite du processus.</li></ul>
+            <div class="pieces-box">
+              <h4>Pièces / sources à verser</h4>
+              <ol><li>Archives ou mémoires de Claude Morin</li><li>Documents gouvernementaux pertinents</li><li>Ouvrages historiques</li><li>Citations vérifiées et contextualisées</li></ol>
+            </div>
+            <a class="next" href="#fiche-2">Fiche suivante → 02</a>
+          </div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="fiche-2" style="padding-top:0">
+  <div class="wrap">
+    <div class="folder rv">
+      <div class="tabs">
+        <a class="tab" href="#fiche-1">01</a><span class="tab on">Fiche 02</span><a class="tab" href="#fiche-3">03</a><a class="tab" href="#fiche-4">04</a>
+      </div>
+      <article class="card">
+        <div class="card-head"><span>Avant 1980</span><span>Dépendance du processus</span><span>Statut : à rédiger</span></div>
+        <h2>Un référendum qui repose<br>sur la bonne foi du fédéral</h2>
+        <p>Un référendum peut produire un mandat politique puissant sans, à lui seul, transformer automatiquement le statut constitutionnel d'un territoire. Cette fiche examine la dépendance du processus envers les réactions d'Ottawa, des institutions canadiennes et des acteurs internationaux.</p>
+        <p>Elle présente aussi les événements historiques invoqués par le dossier pour soutenir que la confiance dans la neutralité ou la coopération fédérale est contestable.</p>
+        <button class="acc-btn" aria-expanded="false" aria-controls="p2" data-acc><span class="lbl">Découvrez la suite</span><span class="chev">▾</span></button>
+        <div class="acc-panel" id="p2" data-open="false" role="region" aria-label="Suite de la fiche 02">
+          <div class="inner"><div class="acc-body">
+            <h3><span class="code">A</span>Absence d'entente préalable</h3>
+            <ul><li>règles du référendum;</li><li>formulation de la question;</li><li>seuil politique;</li><li>reconnaissance du résultat;</li><li>calendrier de négociation;</li><li>transition des pouvoirs.</li></ul>
+            <h3><span class="code">B</span>Épisodes historiques invoqués</h3>
+            <p class="todo">CHRONOLOGIE VISUELLE sobre à construire. Éviter tout langage accusatoire absent des sources.</p>
+            <h3><span class="code">C</span>De la victoire politique à l'effectivité</h3>
+            <ul><li>contrôle des institutions;</li><li>transition juridique;</li><li>reconnaissance du nouvel État;</li><li>risque de conflit d'interprétation.</li></ul>
+            <a class="next" href="#fiche-4">Fiche suivante → 03</a>
+          </div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="fiche-4" class="f04" style="padding-top:0">
+  <div class="wrap">
+    <div class="folder rv">
+      <div class="tabs">
+        <a class="tab" href="#fiche-1">01</a><a class="tab" href="#fiche-2">02</a><a class="tab" href="#fiche-3">03</a><span class="tab on">Fiche 04</span>
+      </div>
+      <article class="card">
+        <div class="card-head"><span>Proposition</span><span>Traitement distinct</span><span>Statut : à définir</span></div>
+        <h2>Sortie du piège :<br>la première voie</h2>
+        <p>Si un référendum ne garantit pas à lui seul l'effectivité d'un changement de statut, quelle stratégie peut réduire cette dépendance? Cette dernière fiche définit ce que le dossier appelle <strong>la première voie</strong>.</p>
+        <p>Elle explique les étapes, les conditions de réussite, les risques, les objections prévisibles et les mécanismes institutionnels nécessaires pour qu'une telle stratégie soit comprise comme une proposition politique concrète plutôt qu'un simple slogan.</p>
+        <button class="acc-btn" aria-expanded="false" aria-controls="p4" data-acc><span class="lbl">Découvrez la suite</span><span class="chev">▾</span></button>
+        <div class="acc-panel" id="p4" data-open="false" role="region" aria-label="Suite de la fiche 04">
+          <div class="inner"><div class="acc-body">
+            <h3><span class="code">A</span>Définition de « la première voie »</h3>
+            <h3><span class="code">B</span>Légitimité démocratique</h3>
+            <h3><span class="code">C</span>Effectivité</h3>
+            <h3><span class="code">D</span>Risques et objections</h3>
+            <h3><span class="code">E</span>Scénario de sortie</h3>
+            <p class="todo">Contenu à fournir par l'auteur : la définition précise de « la première voie » n'existe pas encore dans le pack de conception.</p>
+          </div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="closing" style="padding-top:0">
+  <div class="wrap">
+    <div class="folder rv">
+      <div class="tabs"><span class="tab on" style="background:var(--desk);color:var(--kraft)">Conclusion</span></div>
+      <article class="card">
+        <div class="card-head"><span>Dossier refermé</span><span>Question centrale</span></div>
+        <p>Le Parti québécois ne devrait pas, selon la thèse défendue ici, engager une troisième fois le destin politique du Québec dans un référendum sans chercher au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation du résultat.</p>
+        <p class="q">Comment sortir du <em>piège référendaire</em>?</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer id="sources">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Lois et textes</h4><ul><li>Loi constitutionnelle de 1982</li><li>Loi sur la clarté (2000)</li></ul></div>
+      <div><h4>Décisions</h4><ul><li>Renvoi relatif à la sécession du Québec, 1998</li></ul></div>
+      <div><h4>Archives</h4><ul><li>À verser</li></ul></div>
+      <div><h4>Doctrine</h4><ul><li>À verser</li></ul></div>
+    </div>
+    <p class="note">Mockup — direction 04 « Table d'enquête ». Contenu tiré de 05-CONTENT-MASTER.md et fiches/*.md. Les blocs jaunes signalent du texte à rédiger et à sourcer avant publication.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-acc]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var p=document.getElementById(btn.getAttribute('aria-controls'));
+      var open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded',String(!open));
+      p.setAttribute('data-open',String(!open));
+      btn.querySelector('.lbl').textContent = open ? 'Découvrez la suite' : 'Refermer la fiche';
+    });
+  });
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')}); return;
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+  var props=[].slice.call(document.querySelectorAll('.prop'));
+  var base=props.map(function(p){return getComputedStyle(p).transform});
+  var t=false;
+  addEventListener('scroll',function(){
+    if(t) return; t=true;
+    requestAnimationFrame(function(){
+      var y=scrollY;
+      if(y<innerHeight*1.3) props.forEach(function(p,i){ p.style.transform=base[i]+' translateY('+(y*(+p.dataset.depth)/100)+'px)' });
+      t=false;
+    });
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
