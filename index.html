@@ -242,8 +242,22 @@ h3 .code{font-family:var(--f-mono); font-size:.62em; color:var(--red); letter-sp
 .rv.in{opacity:1; transform:none}
 
 /* ---------- clôture + sources ---------- */
+/* renvois inline vers les fiches */
+.ref{
+  color:var(--red-dark); text-decoration:none; font-weight:600;
+  border-bottom:1px solid rgba(140,29,24,.45); padding-bottom:1px;
+  white-space:nowrap; transition:color .18s ease, border-color .18s ease;
+}
+.ref::before{content:"("} .ref::after{content:")"}
+.ref:hover,.ref:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
+.ref.light{color:#D9635C; border-bottom-color:rgba(217,99,92,.45)}
+.ref.light:hover,.ref.light:focus-visible{color:var(--paper-warm); border-bottom-color:var(--paper-warm)}
+
 .closing{background:linear-gradient(180deg,transparent,rgba(92,17,16,.16))}
 .closing h2{color:var(--paper-warm)}
+.closing-title{margin-bottom:30px}
+.closing p{color:#cfc7b4}
+.closing strong{color:var(--paper-warm); font-weight:600; background:none}
 .closing .q{
   font-family:var(--f-display); text-transform:uppercase; font-weight:700;
   font-size:clamp(2.2rem,6vw,5rem); line-height:.94; color:var(--paper-warm); margin:34px 0 0;
@@ -312,11 +326,11 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
       <div class="sheet-head">
         <span>Note de synthèse</span><span>Feuillet 1/1</span><span>Origine : analyse indépendante</span>
       </div>
-      <h2>Ce que contient ce dossier</h2>
-      <p>Le Parti québécois s'est engagé à tenir un troisième référendum durant son mandat s'il est élu le 5 octobre 2026. Compte tenu de l'importance de l'enjeu, il convient de soumettre le cadre stratégique péquiste à un examen critique afin de déterminer dans quelle mesure, et à quelles conditions, une éventuelle victoire du Oui mènerait véritablement à un changement de statut effectif du Québec, de province à État souverain.</p>
-      <p>Le présent dossier soutient que le référendum comme voie d'accès à la souveraineté aurait été suggéré à Claude Morin par des acteurs fédéraux en 1969 — <strong>voir Fiche 1</strong> — et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie repose depuis le début sur l'acceptation du résultat par le gouvernement fédéral.</p>
-      <p>Le dossier examine ensuite la thèse selon laquelle cette confiance est contredite par des actions du gouvernement fédéral documentées avant même le référendum de 1980 — <strong>voir Fiche 2</strong>. Il pose alors la question suivante : pourquoi le Parti québécois a-t-il maintenu la même logique stratégique en 1995 malgré l'expérience du premier référendum?</p>
-      <p>Le dossier présente enfin plusieurs conséquences politiques et juridiques associées aux deux premières séquences référendaires — <strong>voir Fiche 3</strong> — notamment la Constitution de 1982, le Renvoi relatif à la sécession du Québec de 1998 et la Loi sur la clarté de 2000. L'argument développé est que ces changements ont progressivement resserré le cadre dans lequel pourrait s'exercer un éventuel processus d'accession à la souveraineté.</p>
+      <h2>Présentation du site</h2>
+      <p>Le Parti québécois s'est engagé à tenir un troisième référendum durant son mandat s'il est élu le 5 octobre 2026. Compte tenu de l'importance de l'enjeu, il convient de soumettre le cadre stratégique péquiste à un examen critique pour déterminer dans quelle mesure et à quelles conditions une éventuelle victoire du Oui mènerait véritablement à un changement de statut effectif du Québec, de province à État souverain.</p>
+      <p>Rappelons que le référendum comme voie d'accès à la souveraineté a été suggéré à Claude Morin par les mandarins de P. E. Trudeau en 1969 <a class="ref" href="#fiche-1">fiche 1</a>, et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie péquiste repose depuis le début, entièrement, sur <strong>la bonne foi du fédéral</strong>.</p>
+      <p>Or, cette bonne foi n'a jamais existé <a class="ref" href="#fiche-2">fiche 2</a>, comme le révèlent les graves violations des droits démocratiques du Québec commises par Ottawa, documentées dans deux commissions d'enquête, avant même le référendum de 1980. Comment expliquer que le PQ ait persisté dans cette naïveté en 1995? Cela, au détriment de l'intérêt national.</p>
+      <p>Entre autres conséquences néfastes découlant de ces deux premiers référendums sans garantie d'effectivité <a class="ref" href="#fiche-3">fiche 3</a> : la Constitution de 1982, le Renvoi de 1998, la Loi sur la clarté (2000). Autant de dispositions qui eurent pour effet de réduire la portée du droit fondamental à l'autodétermination du Québec, à tel point de le rendre inopérant.</p>
     </article>
   </div>
 </section>
@@ -460,8 +474,10 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
 <section class="closing">
   <div class="wrap read">
     <p class="index-head">Conclusion</p>
-    <p style="color:#cfc7b4">Le Parti québécois ne devrait pas, selon la thèse défendue ici, engager une troisième fois le destin politique du Québec dans un référendum sans chercher au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation du résultat.</p>
-    <p class="q">Comment sortir<br>du <em>piège référendaire</em>?</p>
+    <h2 class="closing-title">Le piège référendaire,<br>comment en sortir</h2>
+    <p>Le PQ ne peut s'engager à jouer le destin de la nation une troisième fois sans proposer au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation à l'avance du résultat. Une entente permettant de réunir les deux conditions qui mènent à l'effectivité du changement de statut de province à État souverain : l'exercice de nos pouvoirs sur l'ensemble du territoire et la reconnaissance du nouveau statut du Québec à l'international.</p>
+    <p>La réponse d'Ottawa est prévisible : la Loi sur la clarté, qui est à toutes fins pratiques le déni du droit à l'autodétermination du Québec. Faut-il conclure pour autant au deuil du rêve? Non. Plutôt au retour à la dure réalité que suppose le projet souverainiste, et à la seule voie qui y mène : <strong>la première voie</strong> <a class="ref light" href="#fiche-4">fiche 4</a>.</p>
+    <p class="q">Sortir enfin du<br><em>piège référendaire</em></p>
   </div>
 </section>
 
