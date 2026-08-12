@@ -60,8 +60,16 @@ section{padding:104px 0}
 
 /* ---------- HERO ---------- */
 .hero{
-  position:relative; min-height:94vh; display:flex; align-items:flex-end;
-  padding:120px 0 64px; overflow:hidden;
+  position:relative; min-height:88vh; display:flex; align-items:center;
+  padding:92px 0 56px; overflow:hidden;
+}
+/* écrans peu hauts : le titre ne doit jamais être repoussé sous la ligne de flottaison */
+@media(max-height:820px){
+  .hero{min-height:0; padding:76px 0 48px}
+  .hero h1{font-size:clamp(2.8rem,8.4vw,6.6rem)}
+  .hero-meta{margin-top:26px}
+  .hero-meta div{padding:9px 18px 9px 0}
+  .cta-open{margin-top:26px}
 }
 .hero-layers{position:absolute; inset:0; pointer-events:none}
 .layer{position:absolute; will-change:transform}
@@ -97,7 +105,7 @@ section{padding:104px 0}
 .hero-inner{position:relative; z-index:2; width:100%}
 .eyebrow{
   font-family:var(--f-mono); font-size:12px; letter-spacing:.34em; text-transform:uppercase;
-  color:var(--red-deep); margin:0 0 22px;
+  color:var(--red-deep); margin:0 0 18px;
 }
 .eyebrow span{color:rgba(30,58,76,.45)}
 h1{
@@ -108,11 +116,11 @@ h1 .l1{display:block; color:var(--red-deep)}
 h1 .l1 .art{color:rgba(30,58,76,.55)}
 h1 .l2{display:block; color:var(--blue-deep)}
 .hero-sub{
-  margin:28px 0 0; max-width:56ch; color:rgba(30,58,76,.86); font-size:1.06rem;
+  margin:24px 0 0; max-width:56ch; color:rgba(30,58,76,.86); font-size:1.06rem;
   border-left:2px solid var(--red-deep); padding-left:18px;
 }
 .hero-meta{
-  margin-top:44px; display:flex; flex-wrap:wrap;
+  margin-top:34px; display:flex; flex-wrap:wrap;
   border-top:1px solid rgba(30,58,76,.28); border-bottom:1px solid rgba(30,58,76,.28);
 }
 .hero-meta div{
@@ -123,7 +131,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .hero-meta div:last-child{border-right:0}
 .hero-meta b{display:block; color:var(--blue-deep); font-weight:500; margin-top:5px; letter-spacing:.06em; font-size:12.5px}
 .cta-open{
-  display:inline-flex; align-items:center; gap:14px; margin-top:40px;
+  display:inline-flex; align-items:center; gap:14px; margin-top:32px;
   background:var(--red-deep); color:#FBF7EF; text-decoration:none;
   font-family:var(--f-mono); font-size:12.5px; letter-spacing:.2em; text-transform:uppercase;
   padding:15px 26px; border:0; box-shadow:3px 3px 0 var(--blue-deep);
@@ -444,49 +452,12 @@ footer .note{
 </section>
 
 <!-- ============ LES 4 FICHES ============ -->
-<section id="index" style="padding-top:0">
-  <div class="wrap">
-    <p class="index-head">Le piège référendaire en 4 fiches</p>
-
-    <div class="caps rv">
-      <article class="cap">
-        <p class="cap-n">Fiche 01</p>
-        <h3 class="cap-t">Le référendum, une voie suggérée par les mandarins de P. E. Trudeau</h3>
-        <p>Rappelons que le référendum comme voie d'accès à la souveraineté fut suggéré à Claude Morin par les mandarins de P. E. Trudeau en 1969, et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie péquiste repose depuis le début, entièrement, sur la bonne foi du fédéral.</p>
-        <a class="cap-go" href="#fiche-1">Ouvrir la fiche 01 →</a>
-      </article>
-
-      <article class="cap">
-        <p class="cap-n">Fiche 02</p>
-        <h3 class="cap-t">Un référendum qui repose sur la bonne foi du fédéral</h3>
-        <p>Or, cette bonne foi n'a jamais existé, comme le révèlent les graves violations des droits démocratiques du Québec commises par Ottawa, documentées dans deux commissions d'enquête, avant même le référendum de 1980.</p>
-        <a class="cap-go" href="#fiche-2">Ouvrir la fiche 02 →</a>
-      </article>
-
-      <article class="cap">
-        <p class="cap-n">Fiche 03</p>
-        <h3 class="cap-t">Les conséquences néfastes sur l'intérêt national</h3>
-        <p>Comment expliquer que le PQ ait persisté dans cette naïveté en 1995? Cela, au détriment de l'intérêt national. Entre autres conséquences néfastes découlant de ces deux premiers référendums sans garantie d'effectivité : la Constitution de 1982, le Renvoi de 1998, la Loi sur la clarté (2000). Autant de dispositions qui eurent pour effet de nier notre statut de nation (1982) et de réduire la portée du droit fondamental à l'autodétermination du Québec, à tel point de le rendre inopérant (post-1995).</p>
-        <a class="cap-go" href="#fiche-3">Ouvrir la fiche 03 →</a>
-      </article>
-    </div>
-
-    <p class="index-head sortie">Le piège référendaire, comment en sortir</p>
-
-    <div class="caps rv">
-      <article class="cap cap-sortie">
-        <p class="cap-n">Fiche 04</p>
-        <h3 class="cap-t">Sortie du piège : la première voie</h3>
-        <p>Le PQ ne peut s'engager à jouer le destin de la nation une troisième fois sans proposer au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation à l'avance du résultat. Une entente permettant de réunir les deux conditions qui mènent à l'effectivité du changement de statut de province à État souverain : l'exercice du pouvoir sur l'ensemble du territoire et la reconnaissance du nouveau statut du Québec à l'international.</p>
-        <p>La réponse d'Ottawa est prévisible : la Loi sur la clarté, qui est à toutes fins pratiques le déni du droit à l'autodétermination du Québec. Faut-il conclure pour autant au deuil du rêve? Non. Plutôt au retour à la dure réalité que suppose le projet souverainiste, et à la seule voie qui pourrait y mener : <strong>la première voie</strong>.</p>
-        <a class="cap-go" href="#fiche-4">Ouvrir la fiche 04 →</a>
-      </article>
-    </div>
-  </div>
+<section id="index" style="padding:0 0 6px">
+  <div class="wrap"><p class="index-head">Le piège référendaire en 4 fiches</p></div>
 </section>
 
 <!-- ============ FICHE 01 ============ -->
-<section id="fiche-1" class="fiche">
+<section id="fiche-1" class="fiche" style="padding-top:34px">
   <div class="wrap">
     <span class="tag">Fiche 01 · Archive 1969</span>
     <article class="sheet rv">
@@ -499,8 +470,7 @@ footer .note{
       <h2>Le référendum, une voie suggérée<br>par les mandarins de P. E. Trudeau</h2>
 
       <div class="summary read">
-        <p>Claude Morin, le stratège du PQ, révèle qu'en 1969 le référendum comme voie d'accès à la souveraineté lui fut suggéré par des « mandarins » fédéraux. Ces derniers laissaient entendre qu'en cas de victoire du Oui, Ottawa et les provinces allaient « se plier » à la décision — un aveu peu compromettant… en 1969.</p>
-        <p>Le PQ va tenir deux référendums sans jamais exiger d'Ottawa une garantie formelle quant au respect du droit à l'autodétermination du Québec. Bref, en se fiant à <strong>la bonne foi du fédéral</strong>.</p>
+        <p>Rappelons que le référendum comme voie d'accès à la souveraineté fut suggéré à Claude Morin par les mandarins de P. E. Trudeau en 1969, et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie péquiste repose depuis le début, entièrement, sur <strong>la bonne foi du fédéral</strong>.</p>
       </div>
 
       <button class="acc-btn" aria-expanded="false" aria-controls="p1" data-acc>
@@ -509,6 +479,9 @@ footer .note{
 
       <div class="acc-panel" id="p1" data-open="false" role="region" aria-label="Suite de la fiche 01">
         <div class="inner"><div class="acc-body">
+          <p>Claude Morin, le stratège du PQ, révèle qu'en 1969 le référendum comme voie d'accès à la souveraineté lui fut suggéré par des « mandarins » fédéraux. Ces derniers laissaient entendre qu'en cas de victoire du Oui, Ottawa et les provinces allaient « se plier » à la décision — un aveu peu compromettant… en 1969.</p>
+          <p>Le PQ va tenir deux référendums sans jamais exiger d'Ottawa une garantie formelle quant au respect du droit à l'autodétermination du Québec. Bref, en se fiant à la bonne foi du fédéral.</p>
+
           <h3><span class="code">A</span>L'origine du référendum selon Claude Morin</h3>
           <h4>Dans son livre <em>Mes premiers ministres</em></h4>
 
@@ -551,8 +524,7 @@ footer .note{
       <h2>Un référendum qui repose<br>sur la bonne foi du fédéral</h2>
 
       <div class="summary read">
-        <p>Retenons de la fiche 1 que Morin a adopté l'approche référendaire « par la peur qu'elle soulevait chez les plus influents conseillers fédéraux et, je n'en doutai pas une seconde, chez leurs patrons politiques. Une peur de fait confirmée par leur comportement tant en 1980 qu'en 1995. »</p>
-        <p>Le « patron » était en fait P. E. Trudeau, dont la stratégie était inspirée de son « héros » : <strong>Le Prince</strong>.</p>
+        <p>Or, cette bonne foi n'a jamais existé, comme le révèlent les graves violations des droits démocratiques du Québec commises par Ottawa, documentées dans <strong>deux commissions d'enquête</strong>, avant même le référendum de 1980.</p>
       </div>
 
       <button class="acc-btn" aria-expanded="false" aria-controls="p2" data-acc>
@@ -561,6 +533,9 @@ footer .note{
 
       <div class="acc-panel" id="p2" data-open="false" role="region" aria-label="Suite de la fiche 02">
         <div class="inner"><div class="acc-body">
+          <p>Retenons de la fiche 1 que Morin a adopté l'approche référendaire « par la peur qu'elle soulevait chez les plus influents conseillers fédéraux et, je n'en doutai pas une seconde, chez leurs patrons politiques. Une peur de fait confirmée par leur comportement tant en 1980 qu'en 1995. »</p>
+          <p>Le « patron » était en fait P. E. Trudeau, dont la stratégie était inspirée de son « héros » : <em>Le Prince</em>.</p>
+
           <h3><span class="code">A</span>Le Prince</h3>
           <blockquote class="doc">
             <p>« Que le prince songe donc uniquement à conserver sa vie et son État; s'il réussit, tous les moyens qu'il aura pris seront jugés honorables et loués par tout le monde. »</p>
@@ -626,7 +601,7 @@ footer .note{
           « Le plus grand dérèglement de l'esprit consiste à voir les choses telles qu'on le veut et non pas telles qu'elles sont. »
           <span>Jacques-Bénigne Bossuet</span>
         </blockquote>
-        <p>Référendums sans accord Québec–Ottawa : leurs conséquences néfastes sur le statut de la nation (1980) et sur le droit à l'autodétermination du Québec (1995).</p>
+        <p>Comment expliquer que le PQ ait persisté dans cette naïveté en 1995? Cela, au détriment de l'intérêt national. Entre autres conséquences néfastes découlant de ces deux premiers référendums sans garantie d'effectivité : la Constitution de 1982, le Renvoi de 1998, la Loi sur la clarté (2000). Autant de dispositions qui eurent pour effet de <strong>nier notre statut de nation</strong> (1982) et de réduire la portée du droit fondamental à l'autodétermination du Québec, à tel point de le rendre inopérant (post-1995).</p>
       </div>
 
       <button class="acc-btn" aria-expanded="false" aria-controls="p3" data-acc>
@@ -635,6 +610,7 @@ footer .note{
 
       <div class="acc-panel" id="p3" data-open="false" role="region" aria-label="Suite de la fiche 03">
         <div class="inner"><div class="acc-body">
+          <p>Référendums sans accord Québec–Ottawa : leurs conséquences néfastes sur le statut de la nation (1980) et sur le droit à l'autodétermination du Québec (1995).</p>
 
           <h3><span class="code">1</span>Référendum de 1980 : conséquences néfastes pour le statut de nation</h3>
           <p>Le Parti québécois fut élu en 1976 avec l'engagement ferme de tenir un référendum durant son mandat, même en le sachant perdant. Pourquoi? Parce que René Lévesque était un démocrate, selon sa conseillère Martine Tremblay. Cette croyance en la démocratie n'engage que ceux qui y croient. Cette défaite prévisible — 60 % contre 40 % — a eu pour conséquence néfaste de nous voir imposer la Constitution de 1982, qui se fonde sur la négation de notre statut de nation.</p>
@@ -735,7 +711,11 @@ footer .note{
 </section>
 
 <!-- ============ FICHE 04 ============ -->
-<section id="fiche-4" class="fiche fiche-04" style="padding-top:0">
+<section style="padding:26px 0 6px">
+  <div class="wrap"><p class="index-head sortie" style="margin-top:0">Le piège référendaire, comment en sortir</p></div>
+</section>
+
+<section id="fiche-4" class="fiche fiche-04" style="padding-top:34px">
   <div class="wrap">
     <span class="tag">Fiche 04 · Sortie</span>
     <article class="sheet rv">
@@ -827,6 +807,16 @@ footer .note{
       btn.setAttribute('aria-expanded', String(!open));
       panel.setAttribute('data-open', String(!open));
       btn.querySelector('.lbl').textContent = open ? 'Découvrez la suite' : 'Refermer la fiche';
+
+      // à la fermeture, ramener la fiche dans le champ de vision si on lisait plus bas
+      if(open){
+        var sheet = btn.closest('.sheet');
+        var top   = sheet.getBoundingClientRect().top;
+        if(top < 60){
+          var y = scrollY + top - 90;
+          window.scrollTo({top:y, behavior: reduce ? 'auto' : 'smooth'});
+        }
+      }
     });
   });
 
