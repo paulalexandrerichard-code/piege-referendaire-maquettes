@@ -11,59 +11,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#11110F; --ink-soft:#191815;
-  --paper:#E9E1CF; --paper-warm:#F1EADA; --kraft:#CBB993;
-  --gray:#8F8A7D;
-  --red:#8C1D18; --red-dark:#5C1110;
-  --green:#526052; --blue:#283B45;
-
-  /* hero clair — révision */
-  --pale:#E7EEF3; --pale-2:#DCE7EE;
-  --red-deep:#6E1512; --blue-deep:#1E3A4C;
+  /* surface */
+  --pale:#E7EEF3; --pale-2:#DCE7EE; --pale-3:#CFDDE6;
+  /* documents */
+  --paper:#F2EEE2; --paper-warm:#FAF7EF; --kraft:#CBB993; --kraft-dark:#BFA97C;
+  /* encres */
+  --ink:#14140F; --blue-deep:#1E3A4C; --blue-mid:#3D6076;
+  --red-deep:#6E1512; --red:#8C1D18; --green:#46583F;
 
   --f-display:'Barlow Condensed', 'Arial Narrow', Impact, sans-serif;
   --f-mono:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
   --f-read:'Source Serif 4', Georgia, 'Times New Roman', serif;
 
-  --sheet-shadow: 2px 6px 0 rgba(0,0,0,.28), 0 18px 34px -18px rgba(0,0,0,.75);
+  --sheet-shadow: 2px 5px 0 rgba(30,58,76,.10), 0 22px 40px -26px rgba(30,58,76,.55);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0; background:var(--ink); color:var(--paper);
+  margin:0; background:var(--pale); color:var(--blue-deep);
   font-family:var(--f-read); font-size:17px; line-height:1.68;
   -webkit-font-smoothing:antialiased;
 }
-/* ---------- grain global ---------- */
+/* grain discret, très atténué sur fond clair */
 body::after{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.35;
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.16;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay;
+  mix-blend-mode:multiply;
 }
 .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
 .read{max-width:68ch}
+section{padding:104px 0}
+@media(max-width:640px){ section{padding:70px 0} }
 
 /* ---------- barre de classification ---------- */
 .classbar{
   position:fixed; top:0; left:0; right:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between; gap:16px;
-  padding:9px 20px; background:rgba(30,58,76,.95); backdrop-filter:blur(6px);
+  padding:9px 20px; background:rgba(30,58,76,.96); backdrop-filter:blur(6px);
   border-bottom:1px solid rgba(231,238,243,.18);
   font-family:var(--f-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:rgba(231,238,243,.72);
+  color:rgba(231,238,243,.74);
 }
 .classbar b{color:#E9938E; font-weight:500}
 .classbar nav{display:flex; gap:18px}
-.classbar a{color:rgba(231,238,243,.72); text-decoration:none; border-bottom:1px solid transparent}
+.classbar a{color:rgba(231,238,243,.74); text-decoration:none; border-bottom:1px solid transparent}
 .classbar a:hover,.classbar a:focus-visible{color:#fff; border-bottom-color:#E9938E}
-@media(max-width:820px){ .classbar nav{display:none} }
+@media(max-width:900px){ .classbar nav{display:none} }
 
 /* ---------- HERO ---------- */
 .hero{
   position:relative; min-height:94vh; display:flex; align-items:flex-end;
   padding:120px 0 64px; overflow:hidden;
-  background:var(--pale); color:var(--blue-deep);
-  border-bottom:3px solid var(--blue-deep);
 }
 .hero-layers{position:absolute; inset:0; pointer-events:none}
 .layer{position:absolute; will-change:transform}
@@ -74,7 +72,7 @@ body::after{
   border:1px solid rgba(30,58,76,.16);
   box-shadow:0 34px 60px -34px rgba(30,58,76,.65);
 }
-.l-folder::before{ /* onglet de chemise */
+.l-folder::before{
   content:""; position:absolute; top:-34px; left:56px; width:210px; height:34px;
   background:linear-gradient(160deg,#D2BE92,#C4AF82);
   border:1px solid rgba(30,58,76,.16); border-bottom:0;
@@ -82,20 +80,15 @@ body::after{
 }
 .l-sheet{
   right:6%; top:22%; width:min(430px,38vw); height:52%;
-  transform:rotate(1.1deg);
-  background:#FAF7EF; opacity:.9;
+  transform:rotate(1.1deg); background:#FAF7EF; opacity:.9;
   box-shadow:0 18px 32px -22px rgba(30,58,76,.6);
 }
 .l-sheet2{
   right:1%; top:26%; width:min(400px,34vw); height:48%;
-  transform:rotate(-.6deg);
-  background:#FDFBF5; opacity:.8;
+  transform:rotate(-.6deg); background:#FDFBF5; opacity:.8;
   box-shadow:0 18px 32px -22px rgba(30,58,76,.5);
 }
-.l-stamp{
-  right:6%; top:20%; width:min(300px,44vw); transform:rotate(-13deg); opacity:.82;
-}
-/* mobile : les couches ne doivent jamais concurrencer le titre */
+.l-stamp{right:6%; top:20%; width:min(300px,44vw); transform:rotate(-13deg); opacity:.82}
 @media(max-width:900px){
   .hero-layers{opacity:.3}
   .l-folder{right:-14%; top:10%; width:78vw; height:56%}
@@ -109,8 +102,7 @@ body::after{
 .eyebrow span{color:rgba(30,58,76,.45)}
 h1{
   font-family:var(--f-display); font-weight:700; text-transform:uppercase;
-  font-size:clamp(3.2rem,10.5vw,9.5rem); line-height:.86; letter-spacing:-.012em;
-  margin:0;
+  font-size:clamp(3.2rem,10.5vw,9.5rem); line-height:.86; letter-spacing:-.012em; margin:0;
 }
 h1 .l1{display:block; color:var(--red-deep)}
 h1 .l1 .art{color:rgba(30,58,76,.55)}
@@ -120,7 +112,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
   border-left:2px solid var(--red-deep); padding-left:18px;
 }
 .hero-meta{
-  margin-top:44px; display:flex; flex-wrap:wrap; gap:0;
+  margin-top:44px; display:flex; flex-wrap:wrap;
   border-top:1px solid rgba(30,58,76,.28); border-bottom:1px solid rgba(30,58,76,.28);
 }
 .hero-meta div{
@@ -141,17 +133,18 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .cta-open .arw{transition:transform .18s ease}
 .cta-open:hover .arw{transform:translateY(3px)}
 
-/* ---------- feuille de papier ---------- */
+/* ---------- feuille de document ---------- */
 .sheet{
   position:relative; background:var(--paper); color:var(--ink);
   padding:56px 52px 52px 78px; box-shadow:var(--sheet-shadow);
+  border:1px solid rgba(30,58,76,.12);
 }
-.sheet::before{ /* marge + perforations */
-  content:""; position:absolute; left:34px; top:0; bottom:0; width:1px; background:rgba(140,29,24,.35);
+.sheet::before{
+  content:""; position:absolute; left:34px; top:0; bottom:0; width:1px; background:rgba(110,21,18,.35);
 }
 .sheet::after{
   content:""; position:absolute; left:12px; top:56px; bottom:56px; width:10px;
-  background-image:radial-gradient(circle at 5px 5px, rgba(17,17,15,.22) 4.4px, transparent 5px);
+  background-image:radial-gradient(circle at 5px 5px, rgba(30,58,76,.18) 4.4px, transparent 5px);
   background-size:10px 74px; background-repeat:repeat-y;
 }
 @media(max-width:640px){
@@ -160,8 +153,8 @@ h1 .l2{display:block; color:var(--blue-deep)}
 }
 .sheet-head{
   display:flex; flex-wrap:wrap; gap:12px 28px; align-items:baseline;
-  padding-bottom:14px; margin-bottom:30px; border-bottom:2px solid var(--ink);
-  font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#5b564b;
+  padding-bottom:14px; margin-bottom:30px; border-bottom:2px solid var(--blue-deep);
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#5d6b73;
 }
 h2{
   font-family:var(--f-display); font-weight:700; text-transform:uppercase;
@@ -169,123 +162,202 @@ h2{
   margin:0 0 24px; color:var(--ink);
 }
 .sheet p{margin:0 0 20px; max-width:66ch}
-.sheet strong{ background:linear-gradient(transparent 62%, rgba(140,29,24,.22) 62%); font-weight:600 }
+.sheet strong{background:linear-gradient(transparent 62%, rgba(140,29,24,.2) 62%); font-weight:600}
 
-section{padding:110px 0}
-@media(max-width:640px){ section{padding:76px 0} }
+/* renvois inline */
+.ref{
+  color:var(--red-deep); text-decoration:none; font-weight:600; white-space:nowrap;
+  border-bottom:1px solid rgba(110,21,18,.45); padding-bottom:1px;
+}
+.ref::before{content:"("} .ref::after{content:")"}
+.ref:hover,.ref:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
 
-/* ---------- index des fiches ---------- */
+/* ---------- pièce vidéo ---------- */
+.piece-video{
+  margin:34px 0 32px; max-width:660px;
+  border:1px solid rgba(30,58,76,.3); background:var(--paper-warm);
+  box-shadow:2px 4px 0 rgba(30,58,76,.12);
+}
+.sheet .pv-head{
+  margin:0; padding:10px 16px; background:var(--blue-deep); color:#D9E4EA; max-width:none;
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase;
+}
+.pv-quote{margin:0; padding:24px 22px 20px; border-left:3px solid var(--red-deep)}
+.pv-quote p{margin:0 0 10px; max-width:none; font-size:1.18rem; line-height:1.42; font-style:italic; color:var(--ink)}
+.pv-quote cite{font-style:normal; font-family:var(--f-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#5d6b73}
+.pv-frame{position:relative; aspect-ratio:16/9; background:#000; border-top:1px solid rgba(30,58,76,.2)}
+.pv-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
+.pv-cap{
+  display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  padding:11px 16px; border-top:1px solid rgba(30,58,76,.16);
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; color:#5d6b73;
+}
+.pv-cap a{color:var(--red-deep); text-decoration:none; border-bottom:1px solid rgba(110,21,18,.4)}
+.pv-cap a:hover,.pv-cap a:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
+
+/* ---------- titres de section sur fond pâle ---------- */
 .index-head{
   font-family:var(--f-mono); font-size:11px; letter-spacing:.3em; text-transform:uppercase;
-  color:var(--kraft); margin-bottom:26px; display:flex; align-items:center; gap:16px;
+  color:var(--red-deep); margin:0 0 26px; display:flex; align-items:center; gap:16px;
 }
-.index-head::after{content:""; flex:1; height:1px; background:rgba(203,185,147,.3)}
-.idx a{
-  display:grid; grid-template-columns:78px 1fr auto; gap:22px; align-items:center;
-  padding:22px 4px; text-decoration:none; color:var(--paper);
-  border-bottom:1px solid rgba(233,225,207,.16);
-  transition:background .2s ease, padding .2s ease;
+.index-head::after{content:""; flex:1; height:1px; background:rgba(30,58,76,.24)}
+.index-head.sortie{margin-top:60px; color:var(--green)}
+.index-head.sortie::after{background:rgba(70,88,63,.3)}
+
+/* ---------- capsules de fiches ---------- */
+.caps{display:grid; gap:18px}
+.cap{
+  border:1px solid rgba(30,58,76,.18); border-left:3px solid var(--red-deep);
+  background:rgba(255,255,255,.5); padding:26px 28px 24px;
+  transition:background .2s ease, transform .2s ease;
 }
-.idx a:first-child{border-top:1px solid rgba(233,225,207,.16)}
-.idx a:hover,.idx a:focus-visible{background:rgba(233,225,207,.05); padding-left:14px}
-.idx .n{font-family:var(--f-mono); font-size:12px; color:var(--red); letter-spacing:.14em}
-.idx .t{font-family:var(--f-display); text-transform:uppercase; font-size:clamp(1.15rem,2.4vw,1.85rem); line-height:1.06; letter-spacing:.01em}
-.idx .go{font-family:var(--f-mono); font-size:11px; color:var(--gray); letter-spacing:.18em}
-@media(max-width:560px){ .idx a{grid-template-columns:56px 1fr; gap:14px} .idx .go{display:none} }
+.cap:hover{background:rgba(255,255,255,.78); transform:translateY(-2px)}
+.cap-n{margin:0 0 10px; font-family:var(--f-mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--red-deep)}
+.cap-t{
+  font-family:var(--f-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.3rem,2.6vw,2rem); line-height:1.04; margin:0 0 16px; color:var(--blue-deep);
+}
+.cap p{margin:0 0 16px; max-width:70ch; color:rgba(20,20,15,.84)}
+.cap-go{
+  display:inline-block; font-family:var(--f-mono); font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--red-deep); text-decoration:none;
+  border-bottom:1px solid rgba(110,21,18,.4); padding-bottom:3px;
+}
+.cap-go:hover,.cap-go:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
+.cap strong{font-weight:600}
+.cap-sortie{border-left-color:var(--green)}
+.cap-sortie .cap-n,.cap-sortie .cap-go{color:var(--green)}
+.cap-sortie .cap-go{border-bottom-color:rgba(70,88,63,.4)}
 
 /* ---------- fiche ---------- */
 .fiche{position:relative}
 .fiche .tag{
   position:absolute; top:-18px; left:38px; z-index:3;
-  background:var(--kraft); color:#231e16; font-family:var(--f-mono); font-size:11px;
+  background:var(--kraft-dark); color:#241E14; font-family:var(--f-mono); font-size:11px;
   letter-spacing:.22em; text-transform:uppercase; padding:8px 18px;
-  box-shadow:2px 3px 0 rgba(0,0,0,.35);
+  box-shadow:2px 3px 0 rgba(30,58,76,.28);
 }
-.stamp-inline{position:absolute; right:34px; top:34px; width:150px; opacity:.72; transform:rotate(9deg); pointer-events:none}
-@media(max-width:820px){ .stamp-inline{width:104px; right:16px; top:16px; opacity:.5} }
+.stamp-inline{position:absolute; right:34px; top:34px; width:150px; opacity:.6; transform:rotate(9deg); pointer-events:none}
+@media(max-width:820px){ .stamp-inline{width:100px; right:16px; top:16px; opacity:.4} }
 .summary p:last-of-type{margin-bottom:30px}
 
 /* ---------- accordéon ---------- */
 .acc-btn{
   appearance:none; display:inline-flex; align-items:center; gap:14px;
-  background:transparent; border:1px solid var(--ink); color:var(--ink);
+  background:transparent; border:1px solid var(--blue-deep); color:var(--blue-deep);
   font-family:var(--f-mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase;
   padding:14px 24px; cursor:pointer; transition:background .2s ease,color .2s ease;
 }
-.acc-btn:hover,.acc-btn:focus-visible{background:var(--ink); color:var(--paper)}
+.acc-btn:hover,.acc-btn:focus-visible{background:var(--blue-deep); color:var(--paper-warm)}
+.acc-btn[aria-expanded="true"]{background:var(--blue-deep); color:var(--paper-warm)}
 .acc-btn .chev{transition:transform .25s ease}
 .acc-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
 .acc-panel{display:grid; grid-template-rows:0fr; transition:grid-template-rows .36s cubic-bezier(.32,.72,.28,1)}
 .acc-panel[data-open="true"]{grid-template-rows:1fr}
 .acc-panel > .inner{overflow:hidden}
-.acc-body{padding-top:38px; margin-top:34px; border-top:1px dashed rgba(17,17,15,.32)}
+.acc-body{padding-top:38px; margin-top:34px; border-top:1px dashed rgba(30,58,76,.32)}
+
 h3{
   font-family:var(--f-display); text-transform:uppercase; font-weight:600;
-  font-size:clamp(1.25rem,2.1vw,1.7rem); letter-spacing:.02em; margin:34px 0 12px; color:var(--ink);
+  font-size:clamp(1.3rem,2.1vw,1.75rem); letter-spacing:.02em; margin:38px 0 14px; color:var(--blue-deep);
 }
 h3:first-child{margin-top:0}
-h3 .code{font-family:var(--f-mono); font-size:.62em; color:var(--red); letter-spacing:.14em; margin-right:12px}
+h3 .code{font-family:var(--f-mono); font-size:.6em; color:var(--paper-warm); background:var(--red-deep);
+  padding:4px 9px; letter-spacing:.14em; margin-right:12px; vertical-align:middle}
+h4{
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--red-deep); margin:30px 0 12px;
+}
 .acc-body ul{margin:0 0 20px; padding-left:20px; max-width:64ch}
-.acc-body li{margin-bottom:7px}
-.todo{
-  display:block; margin:0 0 24px; padding:14px 18px; max-width:66ch;
-  background:rgba(140,29,24,.07); border-left:3px solid var(--red);
-  font-family:var(--f-mono); font-size:12px; line-height:1.6; color:#5b3230; letter-spacing:.02em;
+.acc-body li{margin-bottom:8px}
+
+/* citations documentaires */
+blockquote.doc{
+  margin:0 0 22px; padding:20px 24px; max-width:64ch;
+  background:rgba(255,255,255,.55); border-left:3px solid var(--blue-deep);
 }
-.pieces{
-  margin-top:36px; padding:24px 26px; background:rgba(40,59,69,.07);
-  border:1px solid rgba(40,59,69,.28);
+blockquote.doc p{margin:0 0 14px; max-width:none; font-size:1.02rem; line-height:1.62}
+blockquote.doc p:last-of-type{margin-bottom:0}
+blockquote.doc.en p{font-style:italic}
+.src{
+  display:block; margin-top:14px; font-family:var(--f-mono); font-size:10.5px;
+  letter-spacing:.08em; line-height:1.6; color:#5d6b73; font-style:normal;
 }
-.pieces h4{
-  margin:0 0 14px; font-family:var(--f-mono); font-size:11px; letter-spacing:.24em;
-  text-transform:uppercase; color:var(--blue);
+.src a{color:var(--red-deep); text-decoration:none; border-bottom:1px solid rgba(110,21,18,.35); word-break:break-word}
+.src a:hover,.src a:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
+.trad{margin-top:12px; padding-top:12px; border-top:1px dotted rgba(30,58,76,.3)}
+.trad b{font-family:var(--f-mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#5d6b73; display:block; margin-bottom:6px}
+
+.epigraph{
+  margin:0 0 30px; padding:0 0 0 20px; border-left:2px solid var(--kraft-dark);
+  font-style:italic; color:#4a4f45; max-width:60ch;
 }
-.pieces ol{margin:0; padding-left:20px; font-size:15px; color:#3a382f}
-.pieces li{margin-bottom:8px}
+.epigraph span{display:block; margin-top:8px; font-style:normal; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:#5d6b73}
+
+.aside-note{
+  margin:26px 0; padding:22px 24px; max-width:66ch;
+  background:rgba(30,58,76,.06); border:1px solid rgba(30,58,76,.2);
+}
+.aside-note p{margin:0; max-width:none; font-size:.98rem; color:#31404a}
+
+/* pièce graphique */
+.piece-fig{margin:30px 0; max-width:660px; border:1px solid rgba(30,58,76,.3); background:var(--paper-warm)}
+.piece-fig .pv-head{background:var(--blue-mid)}
+.chart{
+  border-top:1px solid rgba(30,58,76,.18); border-bottom:1px solid rgba(30,58,76,.18);
+  background:#000; line-height:0;
+}
+.chart img{display:block; width:100%; height:auto}
+.fig-note{display:block; line-height:1.75}
+.fig-note span{display:block; margin-bottom:6px}
+.fig-note b{color:var(--blue-deep)}
+.fig-note .maj,.fig-note .maj b{color:var(--red-deep)}
+
 .next{
-  margin-top:30px; display:inline-flex; gap:10px; font-family:var(--f-mono); font-size:11.5px;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--red-dark); text-decoration:none;
-  border-bottom:1px solid rgba(92,17,16,.4); padding-bottom:3px;
+  margin-top:32px; display:inline-flex; gap:10px; font-family:var(--f-mono); font-size:11.5px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--red-deep); text-decoration:none;
+  border-bottom:1px solid rgba(110,21,18,.4); padding-bottom:3px;
 }
 .next:hover,.next:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
 
-/* fiche 04 : la sortie, plus claire */
-.fiche-04 .sheet{background:linear-gradient(170deg,#F7F2E6,#EFE7D6)}
-.fiche-04 .tag{background:var(--green); color:#eef0ec}
-
-/* ---------- reveal ---------- */
-.rv{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
-.rv.in{opacity:1; transform:none}
-
-/* ---------- clôture + sources ---------- */
-/* renvois inline vers les fiches */
-.ref{
-  color:var(--red-dark); text-decoration:none; font-weight:600;
-  border-bottom:1px solid rgba(140,29,24,.45); padding-bottom:1px;
-  white-space:nowrap; transition:color .18s ease, border-color .18s ease;
+/* fiche 04 — la sortie */
+.fiche-04 .sheet{background:linear-gradient(170deg,#FBF9F2,#F4F1E6)}
+.fiche-04 .tag{background:var(--green); color:#EDF0EC}
+.pending{
+  margin:26px 0 0; padding:18px 22px; max-width:66ch;
+  border:1px dashed rgba(70,88,63,.55); background:rgba(70,88,63,.07);
+  font-family:var(--f-mono); font-size:12px; line-height:1.7; color:#3c4a37;
 }
-.ref::before{content:"("} .ref::after{content:")"}
-.ref:hover,.ref:focus-visible{color:var(--ink); border-bottom-color:var(--ink)}
-.ref.light{color:#D9635C; border-bottom-color:rgba(217,99,92,.45)}
-.ref.light:hover,.ref.light:focus-visible{color:var(--paper-warm); border-bottom-color:var(--paper-warm)}
 
-.closing{background:linear-gradient(180deg,transparent,rgba(92,17,16,.16))}
-.closing h2{color:var(--paper-warm)}
-.closing-title{margin-bottom:30px}
-.closing p{color:#cfc7b4}
-.closing strong{color:var(--paper-warm); font-weight:600; background:none}
+/* ---------- clôture ---------- */
+.closing{background:linear-gradient(180deg, transparent, rgba(30,58,76,.09))}
+.closing-title{margin-bottom:26px; color:var(--blue-deep)}
+.closing p{color:rgba(20,20,15,.84)}
 .closing .q{
   font-family:var(--f-display); text-transform:uppercase; font-weight:700;
-  font-size:clamp(2.2rem,6vw,5rem); line-height:.94; color:var(--paper-warm); margin:34px 0 0;
+  font-size:clamp(2.2rem,6vw,5rem); line-height:.94; color:var(--blue-deep); margin:40px 0 0;
 }
-.closing .q em{color:var(--red); font-style:normal}
-footer{border-top:1px solid rgba(233,225,207,.16); padding:56px 0 80px; color:var(--gray)}
-footer .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:34px}
-footer h4{font-family:var(--f-mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--kraft); margin:0 0 12px}
-footer ul{margin:0; padding:0; list-style:none; font-size:14.5px; line-height:1.9}
-footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; line-height:1.9; color:#6f6a5f; max-width:70ch}
+.closing .q em{color:var(--red-deep); font-style:normal}
 
-:focus-visible{outline:2px solid var(--red); outline-offset:3px}
+/* ---------- sources ---------- */
+footer{background:var(--blue-deep); color:rgba(231,238,243,.78); padding:64px 0 84px}
+footer h2{color:#F1F5F7; margin-bottom:34px}
+footer .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:34px}
+footer h4{color:var(--kraft); margin:0 0 14px}
+footer ul{margin:0; padding:0; list-style:none; font-size:14.5px; line-height:1.7}
+footer li{margin-bottom:12px; padding-left:16px; position:relative}
+footer li::before{content:"—"; position:absolute; left:0; color:rgba(203,185,147,.6)}
+footer a{color:#E9C9A0; text-decoration:none; border-bottom:1px solid rgba(233,201,160,.35); word-break:break-word}
+footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
+footer .note{
+  margin-top:46px; padding-top:24px; border-top:1px solid rgba(231,238,243,.2);
+  font-family:var(--f-mono); font-size:10.5px; line-height:1.9; color:rgba(231,238,243,.55); max-width:76ch;
+}
+
+/* ---------- révélation ---------- */
+.rv{opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease}
+.rv.in{opacity:1; transform:none}
+:focus-visible{outline:2px solid var(--red-deep); outline-offset:3px}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important; transition-duration:.01ms !important}
@@ -298,11 +370,11 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
 <div class="classbar">
   <span><b>◼ Classifié</b> — Dossier PQ-2026-03</span>
   <nav>
-    <a href="#synthese">Synthèse</a><a href="#index">Index</a>
+    <a href="#synthese">Présentation</a><a href="#index">Les 4 fiches</a>
     <a href="#fiche-1">01</a><a href="#fiche-2">02</a><a href="#fiche-3">03</a><a href="#fiche-4">04</a>
-    <a href="#sources">Sources</a>
+    <a href="#conclusion">Conclusion</a><a href="#sources">Sources</a>
   </nav>
-  <span>Rév. 09.08.2026</span>
+  <span>Rév. 12.08.2026</span>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -335,7 +407,7 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
   </div>
 </header>
 
-<!-- ============ SYNTHÈSE ============ -->
+<!-- ============ PRÉSENTATION ============ -->
 <section id="synthese">
   <div class="wrap">
     <article class="sheet rv">
@@ -344,22 +416,71 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
       </div>
       <h2>Présentation du site</h2>
       <p>Le Parti québécois s'est engagé à tenir un troisième référendum durant son mandat s'il est élu le 5 octobre 2026. Compte tenu de l'importance de l'enjeu, il convient de soumettre le cadre stratégique péquiste à un examen critique pour déterminer dans quelle mesure et à quelles conditions une éventuelle victoire du Oui mènerait véritablement à un changement de statut effectif du Québec, de province à État souverain.</p>
-      <p>Rappelons que le référendum comme voie d'accès à la souveraineté a été suggéré à Claude Morin par les mandarins de P. E. Trudeau en 1969 <a class="ref" href="#fiche-1">fiche 1</a>, et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie péquiste repose depuis le début, entièrement, sur <strong>la bonne foi du fédéral</strong>.</p>
-      <p>Or, cette bonne foi n'a jamais existé <a class="ref" href="#fiche-2">fiche 2</a>, comme le révèlent les graves violations des droits démocratiques du Québec commises par Ottawa, documentées dans deux commissions d'enquête, avant même le référendum de 1980. Comment expliquer que le PQ ait persisté dans cette naïveté en 1995? Cela, au détriment de l'intérêt national.</p>
-      <p>Entre autres conséquences néfastes découlant de ces deux premiers référendums sans garantie d'effectivité <a class="ref" href="#fiche-3">fiche 3</a> : la Constitution de 1982, le Renvoi de 1998, la Loi sur la clarté (2000). Autant de dispositions qui eurent pour effet de réduire la portée du droit fondamental à l'autodétermination du Québec, à tel point de le rendre inopérant.</p>
+
+      <figure class="piece-video">
+        <p class="pv-head">Pièce vidéo — la condition essentielle selon Jean-François Lisée</p>
+        <blockquote class="pv-quote">
+          <p>« La souveraineté sera effective qu'au moment où le Canada dit Oui »</p>
+          <cite>Jean-François Lisée</cite>
+        </blockquote>
+        <div class="pv-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/p54qjEjQpwM?start=2484"
+            title="Faire reconnaître un référendum gagnant — Jean-François Lisée"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <figcaption class="pv-cap">
+          <span>Faire reconnaître un référendum gagnant — extrait à 41 min 24 s</span>
+          <a href="https://www.youtube.com/watch?v=p54qjEjQpwM&amp;t=2484s" target="_blank" rel="noopener">Voir sur YouTube ↗</a>
+        </figcaption>
+      </figure>
+
+      <p>Or, les faits « déclassifiés » révèlent que pendant que le fédéral laissait entendre qu'il allait se « plier » à une victoire du Oui, il menait une guerre clandestine, ponctuée d'actes criminels contre le mouvement souverainiste.</p>
+      <p>Nous soutenons que sans entente Québec–Ottawa quant au respect du processus démocratique et à l'acceptation à l'avance du résultat, le Québec, au détriment de l'intérêt national, demeure enfermé dans <strong>le piège référendaire</strong>.</p>
     </article>
   </div>
 </section>
 
-<!-- ============ INDEX ============ -->
+<!-- ============ LES 4 FICHES ============ -->
 <section id="index" style="padding-top:0">
   <div class="wrap">
-    <p class="index-head">Index des pièces</p>
-    <div class="idx rv">
-      <a href="#fiche-1"><span class="n">FICHE 01</span><span class="t">Le référendum, suggéré par le fédéral</span><span class="go">Ouvrir →</span></a>
-      <a href="#fiche-2"><span class="n">FICHE 02</span><span class="t">Un référendum qui repose sur la bonne foi du fédéral</span><span class="go">Ouvrir →</span></a>
-      <a href="#fiche-3"><span class="n">FICHE 03</span><span class="t">Les conséquences néfastes sur le droit à l'autodétermination</span><span class="go">Ouvrir →</span></a>
-      <a href="#fiche-4"><span class="n">FICHE 04</span><span class="t">Sortie du piège : la première voie</span><span class="go">Ouvrir →</span></a>
+    <p class="index-head">Le piège référendaire en 4 fiches</p>
+
+    <div class="caps rv">
+      <article class="cap">
+        <p class="cap-n">Fiche 01</p>
+        <h3 class="cap-t">Le référendum, une voie suggérée par les mandarins de P. E. Trudeau</h3>
+        <p>Rappelons que le référendum comme voie d'accès à la souveraineté fut suggéré à Claude Morin par les mandarins de P. E. Trudeau en 1969, et que, sans entente Québec–Ottawa garantissant le respect du processus et l'acceptation à l'avance du résultat, cette stratégie péquiste repose depuis le début, entièrement, sur la bonne foi du fédéral.</p>
+        <a class="cap-go" href="#fiche-1">Ouvrir la fiche 01 →</a>
+      </article>
+
+      <article class="cap">
+        <p class="cap-n">Fiche 02</p>
+        <h3 class="cap-t">Un référendum qui repose sur la bonne foi du fédéral</h3>
+        <p>Or, cette bonne foi n'a jamais existé, comme le révèlent les graves violations des droits démocratiques du Québec commises par Ottawa, documentées dans deux commissions d'enquête, avant même le référendum de 1980.</p>
+        <a class="cap-go" href="#fiche-2">Ouvrir la fiche 02 →</a>
+      </article>
+
+      <article class="cap">
+        <p class="cap-n">Fiche 03</p>
+        <h3 class="cap-t">Les conséquences néfastes sur l'intérêt national</h3>
+        <p>Comment expliquer que le PQ ait persisté dans cette naïveté en 1995? Cela, au détriment de l'intérêt national. Entre autres conséquences néfastes découlant de ces deux premiers référendums sans garantie d'effectivité : la Constitution de 1982, le Renvoi de 1998, la Loi sur la clarté (2000). Autant de dispositions qui eurent pour effet de nier notre statut de nation (1982) et de réduire la portée du droit fondamental à l'autodétermination du Québec, à tel point de le rendre inopérant (post-1995).</p>
+        <a class="cap-go" href="#fiche-3">Ouvrir la fiche 03 →</a>
+      </article>
+    </div>
+
+    <p class="index-head sortie">Le piège référendaire, comment en sortir</p>
+
+    <div class="caps rv">
+      <article class="cap cap-sortie">
+        <p class="cap-n">Fiche 04</p>
+        <h3 class="cap-t">Sortie du piège : la première voie</h3>
+        <p>Le PQ ne peut s'engager à jouer le destin de la nation une troisième fois sans proposer au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation à l'avance du résultat. Une entente permettant de réunir les deux conditions qui mènent à l'effectivité du changement de statut de province à État souverain : l'exercice du pouvoir sur l'ensemble du territoire et la reconnaissance du nouveau statut du Québec à l'international.</p>
+        <p>La réponse d'Ottawa est prévisible : la Loi sur la clarté, qui est à toutes fins pratiques le déni du droit à l'autodétermination du Québec. Faut-il conclure pour autant au deuil du rêve? Non. Plutôt au retour à la dure réalité que suppose le projet souverainiste, et à la seule voie qui pourrait y mener : <strong>la première voie</strong>.</p>
+        <a class="cap-go" href="#fiche-4">Ouvrir la fiche 04 →</a>
+      </article>
     </div>
   </div>
 </section>
@@ -374,12 +495,12 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
         <text x="100" y="58" text-anchor="middle" fill="#8C1D18" opacity=".85"
           style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:700;letter-spacing:.08em">ARCHIVE</text>
       </svg>
-      <div class="sheet-head"><span>Pièce 01</span><span>Contexte 1968–1970</span><span>Sources : 4 à verser</span></div>
-      <h2>Le référendum,<br>suggéré par le fédéral</h2>
+      <div class="sheet-head"><span>Pièce 01</span><span>1969</span><span>Témoignage documenté</span></div>
+      <h2>Le référendum, une voie suggérée<br>par les mandarins de P. E. Trudeau</h2>
 
       <div class="summary read">
-        <p>Le cœur de cette fiche est la thèse selon laquelle l'idée du référendum comme mécanisme central d'accession à la souveraineté aurait été encouragée ou suggérée à Claude Morin dans le contexte politique fédéral de la fin des années 1960.</p>
-        <p>Si le mécanisme a été pensé dans un cadre où Ottawa conservait un rôle déterminant dans la reconnaissance et la mise en œuvre du résultat, il faut examiner les conséquences de cette dépendance stratégique sur toute la suite de l'argument.</p>
+        <p>Claude Morin, le stratège du PQ, révèle qu'en 1969 le référendum comme voie d'accès à la souveraineté lui fut suggéré par des « mandarins » fédéraux. Ces derniers laissaient entendre qu'en cas de victoire du Oui, Ottawa et les provinces allaient « se plier » à la décision — un aveu peu compromettant… en 1969.</p>
+        <p>Le PQ va tenir deux référendums sans jamais exiger d'Ottawa une garantie formelle quant au respect du droit à l'autodétermination du Québec. Bref, en se fiant à <strong>la bonne foi du fédéral</strong>.</p>
       </div>
 
       <button class="acc-btn" aria-expanded="false" aria-controls="p1" data-acc>
@@ -387,40 +508,32 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
       </button>
 
       <div class="acc-panel" id="p1" data-open="false" role="region" aria-label="Suite de la fiche 01">
-        <div class="inner"><div class="acc-body read">
-          <h3><span class="code">A.</span>Contexte de 1968–1970</h3>
-          <ul>
-            <li>situation politique au Québec;</li>
-            <li>montée du mouvement souverainiste;</li>
-            <li>rôle de Claude Morin;</li>
-            <li>rapport entre stratégie électorale et stratégie constitutionnelle.</li>
-          </ul>
-          <p class="todo">▚ TEXTE À RÉDIGER — 3 à 5 paragraphes. Aucune affirmation ne doit être publiée sans source primaire ou secondaire vérifiable.</p>
+        <div class="inner"><div class="acc-body">
+          <h3><span class="code">A</span>L'origine du référendum selon Claude Morin</h3>
+          <h4>Dans son livre <em>Mes premiers ministres</em></h4>
 
-          <h3><span class="code">B.</span>Origine de l'idée référendaire</h3>
-          <ul>
-            <li>identifier précisément les personnes, documents ou échanges sur lesquels repose l'affirmation;</li>
-            <li>distinguer témoignage, interprétation et preuve documentaire;</li>
-            <li>expliquer la chronologie.</li>
-          </ul>
-          <p class="todo">▚ BLOC CITATION à insérer ici — extrait vérifié et contextualisé, avec renvoi numéroté vers les pièces.</p>
+          <blockquote class="doc">
+            <p>« L'idée du référendum me fut involontairement suggérée en 1969 par trois personnalités renommées de l'establishment politico-technocratique anglophone fédéral (…) : Gordon Robertson, secrétaire du Cabinet fédéral et, à ce titre, premier fonctionnaire d'Ottawa; Robert Bryce, ancien sous-ministre fédéral des Finances et éminent mandarin d'Ottawa; ainsi qu'Al Johnson, sous-ministre de la Santé nationale et du Bien-être social. »</p>
+            <cite class="src">Claude Morin, <em>Mes premiers ministres</em></cite>
+          </blockquote>
 
-          <h3><span class="code">C.</span>Pourquoi cette origine compte</h3>
-          <ul>
-            <li>mécanisme de consultation populaire;</li>
-            <li>absence d'automaticité entre vote et accession à l'indépendance;</li>
-            <li>place du fédéral dans la suite du processus.</li>
-          </ul>
+          <blockquote class="doc">
+            <p>« Ils me firent chacun, poursuit Morin, l'un après l'autre et même une fois les trois ensemble, des commentaires fort instructifs. Ces échanges se situent parmi les plus démystifiants de toute ma carrière. Je n'étais pas près de les oublier. (…) Voilà comment le référendum s'insinua dans nos conversations. (…) Bien que pratiquement jamais utilisée en régime parlementaire britannique, seule une consultation de ce genre serait susceptible, me dirent-ils, d'inciter Ottawa et les provinces à consentir à un nouveau partage des pouvoirs plus avantageux pour le Québec. Pourvu, cependant, que les Québécois s'y fussent montrés très majoritairement favorables et qu'on eût permis l'expression du point de vue fédéral. »</p>
+          </blockquote>
 
-          <div class="pieces">
-            <h4>Pièces / sources à verser</h4>
-            <ol>
-              <li>Archives ou mémoires de Claude Morin — <em>référence à compléter</em></li>
-              <li>Documents gouvernementaux pertinents — <em>référence à compléter</em></li>
-              <li>Ouvrages historiques — <em>référence à compléter</em></li>
-              <li>Citations vérifiées et contextualisées — <em>référence à compléter</em></li>
-            </ol>
-          </div>
+          <blockquote class="doc">
+            <p>« Que dire alors d'un référendum portant sur la souveraineté plutôt que sur un réaménagement du fédéralisme? », demanda Morin à ses interlocuteurs. Robertson, Bryce et Johnson lui répondirent qu'ils « étaient convaincus qu'une telle consultation prouverait le rejet, par les Québécois, du “séparatisme”, mais ils n'hésitèrent pas à reconnaître (aveu peu compromettant… en 1969!) que, mis devant un référendum favorable à l'indépendance, eh bien, Ottawa et les autres provinces devraient s'incliner. »</p>
+          </blockquote>
+
+          <h3><span class="code">B</span>Revenant sur cet épisode, Claude Morin ajoute</h3>
+          <blockquote class="doc">
+            <p>« Dans mon livre <em>Mes premiers ministres</em> (482-485) et dans <em>L'affaire Morin</em> (201-205), je raconte comment cette approche m'a été involontairement et ironiquement suggérée par la peur qu'elle soulevait chez les plus influents conseillers fédéraux et, je n'en doutai pas une seconde, chez leurs patrons politiques. Une peur de fait confirmée par leur comportement tant en 1980 qu'en 1995. »</p>
+            <cite class="src">Claude Morin</cite>
+          </blockquote>
+
+          <h3><span class="code">C</span>Ce qu'il faut retenir</h3>
+          <p>Retenons de ce témoignage de Claude Morin que ce qui l'a convaincu d'adopter le référendum comme voie d'accès à la souveraineté, c'était la peur que cette stratégie suscitait chez les « patrons politiques » des « mandarins ».</p>
+          <p>En fait, le patron des patrons était P. E. Trudeau, l'ultime garant de la bonne foi du fédéral quant au respect de la démocratie québécoise. Or, en cette même année 1969, il était très occupé par le déploiement de mesures de guerre clandestines contre ce même mouvement souverainiste à qui ses « mandarins » promettaient le respect de la démocratie québécoise. Bref, à refermer <strong>le piège référendaire</strong>…</p>
 
           <a class="next" href="#fiche-2">Fiche suivante → 02</a>
         </div></div>
@@ -429,28 +542,70 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
   </div>
 </section>
 
-<!-- ============ FICHE 02 (fermée) ============ -->
+<!-- ============ FICHE 02 ============ -->
 <section id="fiche-2" class="fiche" style="padding-top:0">
   <div class="wrap">
-    <span class="tag">Fiche 02 · Avant 1980</span>
+    <span class="tag">Fiche 02 · 1969–1980</span>
     <article class="sheet rv">
-      <div class="sheet-head"><span>Pièce 02</span><span>Chronologie à monter</span><span>Sources : 4 à verser</span></div>
+      <div class="sheet-head"><span>Pièce 02</span><span>Mesures clandestines</span><span>Commissions Keable et McDonald</span></div>
       <h2>Un référendum qui repose<br>sur la bonne foi du fédéral</h2>
+
       <div class="summary read">
-        <p>Un référendum peut produire un mandat politique puissant sans, à lui seul, transformer automatiquement le statut constitutionnel d'un territoire. Cette fiche examine la dépendance du processus envers les réactions d'Ottawa, des institutions canadiennes et des acteurs internationaux.</p>
-        <p>Elle présente aussi les événements historiques invoqués par le dossier pour soutenir que la confiance dans la neutralité ou la coopération fédérale est contestable.</p>
+        <p>Retenons de la fiche 1 que Morin a adopté l'approche référendaire « par la peur qu'elle soulevait chez les plus influents conseillers fédéraux et, je n'en doutai pas une seconde, chez leurs patrons politiques. Une peur de fait confirmée par leur comportement tant en 1980 qu'en 1995. »</p>
+        <p>Le « patron » était en fait P. E. Trudeau, dont la stratégie était inspirée de son « héros » : <strong>Le Prince</strong>.</p>
       </div>
+
       <button class="acc-btn" aria-expanded="false" aria-controls="p2" data-acc>
         <span class="lbl">Découvrez la suite</span><span class="chev">▾</span>
       </button>
+
       <div class="acc-panel" id="p2" data-open="false" role="region" aria-label="Suite de la fiche 02">
-        <div class="inner"><div class="acc-body read">
-          <h3><span class="code">A.</span>Absence d'entente préalable</h3>
-          <ul><li>règles du référendum;</li><li>formulation de la question;</li><li>seuil politique;</li><li>reconnaissance du résultat;</li><li>calendrier de négociation;</li><li>transition des pouvoirs.</li></ul>
-          <h3><span class="code">B.</span>Épisodes historiques invoqués</h3>
-          <p class="todo">▚ CHRONOLOGIE VISUELLE à construire. Éviter tout langage accusatoire qui ne se trouve pas dans les sources.</p>
-          <h3><span class="code">C.</span>De la victoire politique à l'effectivité</h3>
-          <ul><li>contrôle des institutions;</li><li>transition juridique;</li><li>reconnaissance du nouvel État;</li><li>risque de conflit d'interprétation.</li></ul>
+        <div class="inner"><div class="acc-body">
+          <h3><span class="code">A</span>Le Prince</h3>
+          <blockquote class="doc">
+            <p>« Que le prince songe donc uniquement à conserver sa vie et son État; s'il réussit, tous les moyens qu'il aura pris seront jugés honorables et loués par tout le monde. »</p>
+            <p>« Le triomphe du plus fort est le fait essentiel de l'histoire humaine. »</p>
+            <p>« La force est juste quand elle est nécessaire. »</p>
+            <cite class="src">Jean-Jacques Chevallier, <em>Les grandes œuvres politiques, de Machiavel à nos jours</em>, Librairie Armand Colin</cite>
+          </blockquote>
+
+          <h3><span class="code">B</span>Pour le Prince Trudeau, la force a toujours primé le droit</h3>
+          <blockquote class="doc">
+            <p>« C'est durant ses études à Harvard que Pierre Elliott Trudeau a élaboré sa théorie de la violence politique. Pour lui, aucun impératif moral ne devait entrer en ligne de compte : si l'affrontement devient inévitable, il faut frapper en premier, et frapper fort. Si une seule manœuvre est réaliste dans les circonstances, il serait purement stupide de commencer à se lamenter sur son illégalité. La crainte superstitieuse de l'illégalité a fait rater sa cible à plus d'un grand homme. »</p>
+            <cite class="src">IRAI Québec · <a href="https://www.journaldemontreal.com/2021/03/11/la-realite-a-rattrape-les-fictions-de-denys-arcand" target="_blank" rel="noopener">Journal de Montréal, 11 mars 2021</a></cite>
+          </blockquote>
+
+          <h3><span class="code">C</span>Le Prince et la bonne foi du fédéral</h3>
+          <p>La même année 1969, lorsque les mandarins fédéraux affirmaient à Claude Morin qu'en cas de victoire référendaire Ottawa et les autres provinces devraient s'incliner, le premier ministre Trudeau avait déjà déclenché des mesures de guerre clandestines ponctuées d'actes criminels contre le mouvement souverainiste — possiblement depuis la célèbre déclaration de Charles de Gaulle en 1967, reçue par Ottawa comme une déclaration de guerre.</p>
+          <p>Le 17 décembre 1969, le premier ministre du Canada Pierre E. Trudeau présentait au Comité du Cabinet sur la sécurité et le renseignement un mémorandum ayant pour titre : <em>Current Threats to National Order and Unity: Quebec Separatism</em>.</p>
+          <p class="src" style="margin-bottom:20px">John Starnes, <em>Closely Guarded: A Life in Canadian Security and Intelligence</em>, p. 143-144 et appendice</p>
+
+          <p>Dans ce document, Trudeau demandait aux services de renseignement d'Ottawa — le plus connu étant le Service de sécurité de la GRC, celui qui n'était pas encadré par une loi mais par un simple décret ministériel — de considérer les séparatistes au même titre qu'une puissance hostile, c'est-à-dire d'utiliser à leur endroit des méthodes clandestines de surveillance et de contre-espionnage (<em>counter action</em>).</p>
+          <p>Ce mémorandum visait à produire une couverture politique pour des actes criminels, passés et à venir, éventuellement commis par un corps de police.</p>
+          <p>John Starnes, le chef du Service de renseignement et de sécurité de la police fédérale, était mal à l'aise avec l'idée que son corps de police serve à commettre des actes illégaux contre un parti démocratique, légal et légitime : le Parti québécois.</p>
+
+          <h3><span class="code">D</span>2023 : l'opération FAN TAN dirigée du bureau du premier ministre</h3>
+          <p>En 2023, deux chercheurs révèlent qu'en 1971-1972, les opérations étaient dirigées directement du bureau du premier ministre.</p>
+          <blockquote class="doc en">
+            <p>« The people working there are very dynamic and their main occupation will obviously be a direct attack on separatism and subversion in Quebec through any means at their disposal. »</p>
+            <cite class="src">« The FAN TAN file: Quebec separatism and security service resistance to politicization 1971–72 », <em>Intelligence and National Security</em>, 2023 — <a href="https://www.tandfonline.com/doi/full/10.1080/02684527.2023.2246235" target="_blank" rel="noopener">tandfonline.com</a></cite>
+          </blockquote>
+
+          <p><em>The Globe and Mail</em> a fait écho à cette recherche : « Pierre Trudeau's office ran secret intelligence unit to quell separatist movement in Quebec, researchers find ».</p>
+          <blockquote class="doc">
+            <p>La recherche publiée en août 2023 révèle que le bureau du premier ministre Pierre Trudeau a exploité une unité de renseignement secrète, portant le nom de code FAN TAN, entre 1971 et 1972, afin de surveiller et de contrer le mouvement souverainiste québécois. Fondée sur des documents nouvellement accessibles, l'unité visait des composantes légales du mouvement indépendantiste avant d'être fermée à la suite de l'opposition de dirigeants de la GRC.</p>
+            <cite class="src"><a href="https://www.theglobeandmail.com/canada/article-quebec-separatists-intelligence-unit-pmo/" target="_blank" rel="noopener">The Globe and Mail</a></cite>
+          </blockquote>
+
+          <h3><span class="code">E</span>Malgré les commissions d'enquête, les référendums ont lieu</h3>
+          <p>Même après les révélations de graves violations des droits démocratiques par les deux commissions d'enquête — Keable et McDonald — le Parti québécois va tenir son référendum de 1980.</p>
+          <blockquote class="doc">
+            <p>Denys Arcand, à propos du référendum de 1980, dont la trame de fond est un parallèle révélateur entre la pensée de Machiavel et l'action politique de Pierre Elliott Trudeau : « Généralement, en politique, c'est toujours Machiavel qui gagne » — et Machiavel était « le héros de Trudeau ».</p>
+            <cite class="src"><a href="https://www.journaldemontreal.com/2021/03/11/la-realite-a-rattrape-les-fictions-de-denys-arcand" target="_blank" rel="noopener">Journal de Montréal, 11 mars 2021</a></cite>
+          </blockquote>
+
+          <p>Le PQ a tenu le référendum de 1995 en se fiant entièrement à la bonne foi du fédéral. Cette naïveté a entraîné des conséquences néfastes pour le droit à l'autodétermination du Québec.</p>
+
           <a class="next" href="#fiche-3">Fiche suivante → 03</a>
         </div></div>
       </div>
@@ -458,54 +613,206 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
   </div>
 </section>
 
-<!-- ============ FICHE 04 — la sortie ============ -->
-<section id="fiche-4" class="fiche fiche-04" style="padding-top:0">
+<!-- ============ FICHE 03 ============ -->
+<section id="fiche-3" class="fiche" style="padding-top:0">
   <div class="wrap">
-    <span class="tag">Fiche 04 · Sortie</span>
+    <span class="tag">Fiche 03 · 1980–2000</span>
     <article class="sheet rv">
-      <div class="sheet-head"><span>Pièce 04</span><span>Proposition</span><span>Traitement visuel distinct</span></div>
-      <h2>Sortie du piège :<br>la première voie</h2>
+      <div class="sheet-head"><span>Pièce 03</span><span>1982 · 1998 · 2000</span><span>Conséquences</span></div>
+      <h2>Référendums : les conséquences<br>néfastes sur l'intérêt national</h2>
+
       <div class="summary read">
-        <p>Si un référendum ne garantit pas à lui seul l'effectivité d'un changement de statut, quelle stratégie peut réduire cette dépendance? Cette dernière fiche définit ce que le dossier appelle <strong>la première voie</strong>.</p>
-        <p>Elle explique les étapes, les conditions de réussite, les risques, les objections prévisibles et les mécanismes institutionnels nécessaires pour qu'une telle stratégie soit comprise comme une proposition politique concrète plutôt qu'un simple slogan.</p>
+        <blockquote class="epigraph">
+          « Le plus grand dérèglement de l'esprit consiste à voir les choses telles qu'on le veut et non pas telles qu'elles sont. »
+          <span>Jacques-Bénigne Bossuet</span>
+        </blockquote>
+        <p>Référendums sans accord Québec–Ottawa : leurs conséquences néfastes sur le statut de la nation (1980) et sur le droit à l'autodétermination du Québec (1995).</p>
       </div>
-      <button class="acc-btn" aria-expanded="false" aria-controls="p4" data-acc>
+
+      <button class="acc-btn" aria-expanded="false" aria-controls="p3" data-acc>
         <span class="lbl">Découvrez la suite</span><span class="chev">▾</span>
       </button>
-      <div class="acc-panel" id="p4" data-open="false" role="region" aria-label="Suite de la fiche 04">
-        <div class="inner"><div class="acc-body read">
-          <h3><span class="code">A.</span>Définition de « la première voie »</h3>
-          <h3><span class="code">B.</span>Légitimité démocratique</h3>
-          <h3><span class="code">C.</span>Effectivité</h3>
-          <h3><span class="code">D.</span>Risques et objections</h3>
-          <h3><span class="code">E.</span>Scénario de sortie</h3>
-          <p class="todo">▚ Contenu à fournir par l'auteur : la définition précise de « la première voie » n'existe pas encore dans le pack de conception.</p>
+
+      <div class="acc-panel" id="p3" data-open="false" role="region" aria-label="Suite de la fiche 03">
+        <div class="inner"><div class="acc-body">
+
+          <h3><span class="code">1</span>Référendum de 1980 : conséquences néfastes pour le statut de nation</h3>
+          <p>Le Parti québécois fut élu en 1976 avec l'engagement ferme de tenir un référendum durant son mandat, même en le sachant perdant. Pourquoi? Parce que René Lévesque était un démocrate, selon sa conseillère Martine Tremblay. Cette croyance en la démocratie n'engage que ceux qui y croient. Cette défaite prévisible — 60 % contre 40 % — a eu pour conséquence néfaste de nous voir imposer la Constitution de 1982, qui se fonde sur la négation de notre statut de nation.</p>
+          <p>À la suite de la défaite référendaire du 20 mai 1980, lors de la conférence constitutionnelle du 15 septembre 1980, René Lévesque, en position de faiblesse, va renoncer au statut de peuple et au droit à l'autodétermination.</p>
+
+          <blockquote class="doc">
+            <p>« [Trudeau] est prêt à inscrire dans la déclaration de principe de la future Constitution le caractère distinct du Québec, mais à une condition : René Lévesque doit biffer de son texte l'expression “peuple québécois” pour y substituer “société québécoise”. Pourquoi pas? Le chef indépendantiste accepte même de rayer le mot “autodétermination”. La déclaration de principes évoquera donc la volonté d'une province de faire partie “librement” de la fédération. »</p>
+            <cite class="src">Pierre Godin, <em>René Lévesque, l'homme brisé</em>, Boréal, p. 55</cite>
+          </blockquote>
+
+          <blockquote class="doc">
+            <p>« Le droit à l'autodétermination, pour la nation canadienne-française, est de cet ordre. C'est un patrimoine collectif que je considère comme définitivement acquis et que je ne consentirai jamais à remettre en jeu dans aucune négociation. »</p>
+            <cite class="src">Daniel Johnson, <em>Égalité ou indépendance</em>, p. 120</cite>
+          </blockquote>
+
+          <h4>Le rapatriement de la Constitution</h4>
+          <p>Le rapatriement de la Constitution sera rendu possible à la suite de la collusion entre le politique et le juridique — Frédéric Bastien, <em>La bataille de Londres</em>, chapitre 14 : « Coup d'État à la Cour suprême ». Ce qui permettra à une majorité de provinces anglaises d'imposer au Québec une constitution contre sa volonté, avec pour effet néfaste d'effacer son statut de nation.</p>
+          <p>Une constitution découle d'une intention politique qui lui donne sa raison d'être. P. E. Trudeau a fait connaître son intention de nier notre statut de nation dès 1977 :</p>
+
+          <blockquote class="doc">
+            <p>« Il n'existe pas de peuple québécois ou canadien-français (…) Pour être un peuple ou une nation, il faut être capable de se gouverner, se conduire en adulte et d'avoir une destinée. (…) Les Québécois n'entrent pas dans la définition de l'ONU d'un vrai peuple, d'une vraie nation… »</p>
+            <cite class="src"><em>L'Étoile du Lac</em> (organe officiel des comtés Lac-Saint-Jean–Roberval), 23 novembre 1977, W. Hidola Girard, avocat, Roberval</cite>
+          </blockquote>
+
+          <p>En 1982, Trudeau arrive à son but : imposer sa constitution, dont la raison d'être est la négation de notre statut de nation. Le multiculturalisme, devenu la doctrine d'État du Canada, implique que tous les moyens de l'État soient mis à contribution pour réduire une nation fondatrice à l'échelle d'un groupe ethnique dans un Canada postnational. Un défi existentiel à notre nation.</p>
+
+          <div class="aside-note">
+            <p>Des décennies plus tard, le Québec va tenter de répondre à ce défi en opposant sa propre constitution d'État national, un bouclier contre la Constitution de 1982, au nom du droit fondamental de la nation à prendre tous les moyens de la légitime défense pour assurer sa continuité historique. Le PQ va refuser de l'appuyer, au motif qu'il avait son projet de constitution provisoire, liée au référendum, rejetée à 75 % au Québec. Au nom de la logique référendaire, le PQ rejoignait ainsi le camp du Non, devenant un allié objectif des visées de P. E. Trudeau. Autre conséquence du piège référendaire.</p>
+          </div>
+
+          <h3><span class="code">2</span>Référendum de 1995, tenu sans accord préalable Québec–Ottawa</h3>
+          <p>Ottawa aurait refusé de reconnaître une victoire souverainiste <strong>(A)</strong>. Le fédéral aurait organisé un référendum au Québec et, en cas de victoire souverainiste, aurait tenu un autre référendum à la grandeur du Canada pour l'acceptation du résultat <strong>(B)</strong>. Pendant ce temps, Ottawa aurait activé le plan de la partition du territoire de l'État du Québec <strong>(C)</strong>.</p>
+
+          <h4>(A) Ottawa aurait rejeté un Oui victorieux</h4>
+          <blockquote class="doc">
+            <p>Dans le livre <em>Iron Man</em>, le journaliste Lawrence Martin révèle que le premier ministre du Canada Jean Chrétien aurait rejeté un Oui victorieux. M. Goldenberg lui a confié que M. Chrétien aurait alors dit : « Nous avons compris le message de la population, mais ce n'est pas de briser le pays. Nous avons du travail à faire, mais ce n'est pas de briser le pays. »</p>
+            <p>« À 50 % plus un, je n'étais pas pour laisser aller le pays. » — Jean Chrétien</p>
+            <p>« Le référendum était un exercice consultatif et rien dans notre Constitution ne permet de changer quoi que ce soit au moyen d'un référendum. » — Herb Gray, solliciteur général de l'époque, qui affirme par surcroît que les Forces armées canadiennes étaient prêtes à protéger les édifices fédéraux.</p>
+            <cite class="src">« Chrétien aurait rejeté un OUI victorieux », <em>Le Devoir</em>, Manon Cornellier, 22 octobre 2003</cite>
+          </blockquote>
+
+          <h4>(B) Le plan secret de Jean Chrétien en cas de victoire du Oui</h4>
+          <blockquote class="doc en">
+            <p>« His plan was to move quickly, within a month or so, to ask Quebecers another question in another referendum: Do you want Quebec to separate from Canada? If those voting yes had a clear majority — not just 50 per cent plus one but some unspecified threshold — he planned to hold a national referendum on what position the federal government should take. »</p>
+            <div class="trad">
+              <b>Traduction</b>
+              Son plan était d'agir rapidement et, dans un délai d'un mois environ, de poser une autre question aux Québécois lors d'un second référendum : souhaitez-vous que le Québec se sépare du Canada? Si le Oui l'emportait par une majorité claire, supérieure à 50 % plus un sans que le seuil exact soit précisé, il prévoyait tenir un référendum national sur la position que devrait prendre le gouvernement fédéral face à ce développement.
+            </div>
+            <cite class="src"><em>National Post</em>, Bob Plamondon, 31 octobre 2017</cite>
+          </blockquote>
+
+          <h4>(C) Ottawa activait la partition du Québec</h4>
+          <blockquote class="doc">
+            <p>« Lors d'un entretien en 2007, Dion expliqua que le gouvernement fédéral avait commencé à examiner des scénarios possibles, y compris la mission ingrate de diviser le territoire et de décider qui devrait posséder quoi. »</p>
+            <cite class="src"><em>Le Devoir</em>, « Biographie du chef libéral Stéphane Dion — Ottawa a étudié des scénarios sur la partition du Québec ». Territoires visés : ceux acquis en 1898 et 1912.</cite>
+          </blockquote>
+
+          <h3><span class="code">3</span>Le référendum de 1995 ne pouvait mener à la souveraineté</h3>
+          <p>Les conséquences néfastes pour le droit à l'autodétermination du Québec :</p>
+          <ul>
+            <li><strong>Le Renvoi de 1998</strong> à la Cour suprême — la partition du territoire du Québec devient un enjeu de la négociation;</li>
+            <li><strong>La Loi sur la clarté</strong> — a pour effet de rendre inopérant le droit à l'autodétermination externe du Québec;</li>
+            <li><strong>Le plan B</strong> — faire souffrir économiquement le Québec;</li>
+            <li><strong>La noyade migratoire</strong> — « la démographie, c'est le destin », formule souvent attribuée à Auguste Comte.</li>
+          </ul>
+
+          <p>À la suite du référendum de 1995, l'appui à une immigration massive est passé de 20 % à 60 % en seulement quelques années.</p>
+
+          <figure class="piece-fig">
+            <p class="pv-head">Pièce graphique — « Il y a trop d'immigration au Canada », 1977-2023</p>
+
+            <div class="chart">
+              <picture>
+                <source srcset="img/immigration-environics.webp" type="image/webp">
+                <img src="img/immigration-environics.jpg" width="900" height="573" loading="lazy" decoding="async"
+                  alt="Graphique : opinion canadienne sur les niveaux d'immigration de 1977 à septembre 2023. La courbe « d'accord » avec l'énoncé « il y a trop d'immigration au Canada » domine jusqu'au milieu des années 1990, culminant autour de 66 %. Après 1997 elle chute et croise la courbe « en désaccord » vers 2000. Le désaccord domine ensuite deux décennies, jusqu'à environ 65 % en 2022, puis la tendance s'inverse : 44 % se disent d'accord en septembre 2023, contre 27 % l'année précédente.">
+              </picture>
+            </div>
+
+            <figcaption class="pv-cap fig-note">
+              <span><b>Question posée :</b> « Dans l'ensemble, il y a trop d'immigration au Canada ». Série suivie depuis 1977.</span>
+              <span><b>Source des données :</b> Environics Institute for Survey Research, <em>Focus Canada</em>. Graphique : Bloomberg.</span>
+              <span class="maj"><b>Mise à jour 2024 :</b> l'accord atteint 58 % — un bond de 14 points en un an, après 17 points l'année précédente. Il s'agit de la variation la plus rapide sur deux ans depuis le début de la série en 1977, et de la plus forte proportion depuis 1998.</span>
+            </figcaption>
+          </figure>
+
+          <p>Justin Trudeau est arrivé en 2015 avec l'idée du <em>Century Initiative</em>; le terrain au Canada anglais était mûr pour adopter une politique d'immigration massive. D'où le chemin Roxham…</p>
+
+          <h3><span class="code">4</span>Conclusion sur le piège référendaire</h3>
+          <p>Le constat qui s'impose, c'est que le référendum « suggéré » par les « mandarins » de P. E. Trudeau et reposant sur la bonne foi du fédéral ne pouvait mener à une victoire référendaire effective sans un accord Québec–Ottawa à cet effet. Les défaites référendaires ont permis au fédéral de réduire l'espace politique de la nation, au point de rendre inopérant — Loi sur la clarté — le droit à l'autodétermination externe du Québec.</p>
+          <p>Si un troisième référendum, sans entente préalable Québec–Ottawa, n'a aucune chance d'être effectif, quelle stratégie adopter pour garder le possible possible? La troisième voie… stérile? Non. Retour à la réalité : <strong>la première voie</strong>.</p>
+
+          <a class="next" href="#fiche-4">Fiche suivante → 04</a>
         </div></div>
       </div>
     </article>
   </div>
 </section>
 
+<!-- ============ FICHE 04 ============ -->
+<section id="fiche-4" class="fiche fiche-04" style="padding-top:0">
+  <div class="wrap">
+    <span class="tag">Fiche 04 · Sortie</span>
+    <article class="sheet rv">
+      <div class="sheet-head"><span>Pièce 04</span><span>Proposition</span><span>Contenu détaillé à venir</span></div>
+      <h2>Sortie du piège :<br>la première voie</h2>
+
+      <div class="summary read">
+        <p>Le PQ ne peut s'engager à jouer le destin de la nation une troisième fois sans proposer au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation à l'avance du résultat. Une entente permettant de réunir les deux conditions qui mènent à l'effectivité du changement de statut de province à État souverain : l'exercice du pouvoir sur l'ensemble du territoire et la reconnaissance du nouveau statut du Québec à l'international.</p>
+        <p>La réponse d'Ottawa est prévisible : la Loi sur la clarté, qui est à toutes fins pratiques le déni du droit à l'autodétermination du Québec. Faut-il conclure pour autant au deuil du rêve? Non. Plutôt au retour à la dure réalité que suppose le projet souverainiste, et à la seule voie qui pourrait y mener : <strong>la première voie</strong>.</p>
+      </div>
+
+      <p class="pending">▚ Contenu détaillé à fournir — la définition précise de « la première voie », ses étapes, ses conditions de réussite, les objections prévisibles et le scénario de sortie n'ont pas encore été transmis.</p>
+    </article>
+  </div>
+</section>
+
 <!-- ============ CLÔTURE ============ -->
-<section class="closing">
+<section id="conclusion" class="closing">
   <div class="wrap read">
-    <p class="index-head">Conclusion</p>
-    <h2 class="closing-title">Le piège référendaire,<br>comment en sortir</h2>
-    <p>Le PQ ne peut s'engager à jouer le destin de la nation une troisième fois sans proposer au préalable une entente Québec–Ottawa garantissant le respect du processus démocratique et l'acceptation à l'avance du résultat. Une entente permettant de réunir les deux conditions qui mènent à l'effectivité du changement de statut de province à État souverain : l'exercice de nos pouvoirs sur l'ensemble du territoire et la reconnaissance du nouveau statut du Québec à l'international.</p>
-    <p>La réponse d'Ottawa est prévisible : la Loi sur la clarté, qui est à toutes fins pratiques le déni du droit à l'autodétermination du Québec. Faut-il conclure pour autant au deuil du rêve? Non. Plutôt au retour à la dure réalité que suppose le projet souverainiste, et à la seule voie qui y mène : <strong>la première voie</strong> <a class="ref light" href="#fiche-4">fiche 4</a>.</p>
+    <p class="index-head">Conclusion sur le piège référendaire</p>
+    <h2 class="closing-title">Le constat qui s'impose</h2>
+    <p>Le référendum « suggéré » par les « mandarins » de P. E. Trudeau et reposant sur la bonne foi du fédéral ne pouvait mener à une victoire référendaire effective sans un accord Québec–Ottawa à cet effet. Les défaites référendaires ont permis au fédéral de réduire l'espace politique de la nation, au point de rendre inopérant — Loi sur la clarté — le droit à l'autodétermination externe du Québec.</p>
+    <p>Si un troisième référendum, sans entente préalable Québec–Ottawa, n'a aucune chance d'être effectif, quelle stratégie adopter pour garder le possible possible? La troisième voie… stérile? Non. Retour à la réalité : <a class="ref" href="#fiche-4">la première voie</a>.</p>
     <p class="q">Sortir enfin du<br><em>piège référendaire</em></p>
   </div>
 </section>
 
+<!-- ============ SOURCES ============ -->
 <footer id="sources">
   <div class="wrap">
+    <h2>Sources et pièces</h2>
     <div class="cols">
-      <div><h4>Lois et textes</h4><ul><li>Loi constitutionnelle de 1982</li><li>Loi sur la clarté (2000)</li></ul></div>
-      <div><h4>Décisions</h4><ul><li>Renvoi relatif à la sécession du Québec, 1998</li></ul></div>
-      <div><h4>Archives</h4><ul><li>À verser</li><li>À verser</li></ul></div>
-      <div><h4>Doctrine</h4><ul><li>À verser</li></ul></div>
+      <div>
+        <h4>Fiche 01 — Origine de la stratégie</h4>
+        <ul>
+          <li>Claude Morin, <em>Mes premiers ministres</em>, p. 482-485</li>
+          <li>Claude Morin, <em>L'affaire Morin</em>, p. 201-205</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Fiche 02 — Bonne foi du fédéral</h4>
+        <ul>
+          <li>Jean-Jacques Chevallier, <em>Les grandes œuvres politiques, de Machiavel à nos jours</em>, Librairie Armand Colin</li>
+          <li>John Starnes, <em>Closely Guarded: A Life in Canadian Security and Intelligence</em>, p. 143-144 et appendice</li>
+          <li>« The FAN TAN file: Quebec separatism and security service resistance to politicization 1971–72 », <em>Intelligence and National Security</em>, 2023 — <a href="https://www.tandfonline.com/doi/full/10.1080/02684527.2023.2246235" target="_blank" rel="noopener">tandfonline.com</a></li>
+          <li><em>The Globe and Mail</em>, « Pierre Trudeau's office ran secret intelligence unit to quell separatist movement in Quebec » — <a href="https://www.theglobeandmail.com/canada/article-quebec-separatists-intelligence-unit-pmo/" target="_blank" rel="noopener">theglobeandmail.com</a></li>
+          <li><em>Journal de Montréal</em>, « La réalité a rattrapé les fictions de Denys Arcand », 11 mars 2021 — <a href="https://www.journaldemontreal.com/2021/03/11/la-realite-a-rattrape-les-fictions-de-denys-arcand" target="_blank" rel="noopener">journaldemontreal.com</a></li>
+          <li>IRAI Québec</li>
+          <li>Commissions d'enquête Keable et McDonald</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Fiche 03 — Conséquences</h4>
+        <ul>
+          <li>Pierre Godin, <em>René Lévesque, l'homme brisé</em>, Boréal, p. 55</li>
+          <li>Daniel Johnson, <em>Égalité ou indépendance</em>, p. 120</li>
+          <li>Frédéric Bastien, <em>La bataille de Londres</em>, chapitre 14</li>
+          <li><em>L'Étoile du Lac</em>, 23 novembre 1977, W. Hidola Girard</li>
+          <li>Lawrence Martin, <em>Iron Man</em></li>
+          <li><em>Le Devoir</em>, Manon Cornellier, « Chrétien aurait rejeté un OUI victorieux », 22 octobre 2003</li>
+          <li><em>National Post</em>, Bob Plamondon, 31 octobre 2017</li>
+          <li><em>Le Devoir</em>, « Ottawa a étudié des scénarios sur la partition du Québec »</li>
+          <li>Environics Institute for Survey Research</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Textes juridiques</h4>
+        <ul>
+          <li>Loi constitutionnelle de 1982</li>
+          <li>Renvoi relatif à la sécession du Québec, 1998</li>
+          <li>Loi sur la clarté, 2000</li>
+        </ul>
+        <h4 style="margin-top:26px">Fiche 04</h4>
+        <ul><li>Sources à verser</li></ul>
+      </div>
     </div>
-    <p class="note">Maquette de direction artistique — direction « Kraft » retenue. Ceci n'est pas le site final : les zones marquées ▚ signalent du texte à rédiger et à sourcer avant publication, et aucune source n'est encore versée.</p>
+    <p class="note">Maquette de direction artistique — direction « Kraft ». Ceci n'est pas le site final. Le contenu détaillé de la fiche 04 et ses sources restent à fournir. Certaines références citées dans le texte n'ont pas encore d'hyperlien vérifié.</p>
   </div>
 </footer>
 
@@ -526,7 +833,7 @@ footer .note{margin-top:44px; font-family:var(--f-mono); font-size:11px; letter-
   if(!reduce){
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    },{threshold:.12});
+    },{threshold:.08});
     document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 
     var layers = [].slice.call(document.querySelectorAll('.layer'));
