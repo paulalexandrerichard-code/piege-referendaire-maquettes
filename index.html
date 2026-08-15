@@ -172,6 +172,25 @@ h2{
 .sheet p{margin:0 0 20px; max-width:66ch}
 .sheet strong{background:linear-gradient(transparent 62%, rgba(140,29,24,.2) 62%); font-weight:600}
 
+/* ---------- convention éditoriale ----------
+   Le texte de l'auteur s'affiche en capitales; les citations, les sources,
+   les traductions et les légendes restent en bas-de-casse.
+   La transformation est faite en CSS : le HTML conserve la casse normale,
+   ce qui évite que les lecteurs d'écran épellent les mots lettre par lettre. */
+#synthese .sheet > p,
+.summary > p,
+.acc-body > p:not(.src):not(.pending),
+.acc-body > ul li,
+.aside-note p,
+.closing .wrap > p:not(.index-head):not(.q){
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  font-size:.93em;
+  line-height:1.64;
+}
+/* les mots mis en évidence gardent leur soulignement, sans surcharge de graisse */
+.acc-body > p strong,.summary > p strong,#synthese .sheet > p strong{letter-spacing:.02em}
+
 /* renvois inline */
 .ref{
   color:var(--red-deep); text-decoration:none; font-weight:600; white-space:nowrap;
