@@ -80,9 +80,10 @@ section{padding:104px 0}
 }
 .l-stamp{right:7%; top:17%; width:min(268px,26vw); transform:rotate(-12deg); opacity:.85}
 @media(max-width:900px){
-  .hero-layers{opacity:.3}
-  .l-folder{right:-14%; top:8%; bottom:10%; width:78vw}
-  .l-stamp{top:auto; bottom:6%; right:-4%; width:56vw}
+  .hero-layers{display:none}          /* la chemise passait sous le texte : on la retire */
+  .hero{padding:30px 0 22px}
+  .eyebrow{letter-spacing:.24em; margin-bottom:14px}
+  .hero-sub{margin-top:20px}
 }
 .hero-inner{position:relative; z-index:2; width:100%}
 .eyebrow{
@@ -103,7 +104,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
 }
 
 /* ---------- rangée de pochettes ---------- */
-.pochettes{padding:5px 0 40px}
+.pochettes{padding:5px 0 26px}
 
 /* la ligne : chaîne rouge 01-02-03, rupture, puis 04 */
 .pk-chain{
@@ -177,10 +178,24 @@ h1 .l2{display:block; color:var(--blue-deep)}
 
 @media(max-width:900px){
   .pk-chain,.pk-caps{display:none}
-  .pk-row{grid-template-columns:repeat(2,1fr); gap:18px 16px}
-  .pk-body{min-height:0}
+  .pk-row{grid-template-columns:repeat(2,1fr); gap:26px 16px}
+  .pk-card{margin-top:24px}
+  .pk-body{min-height:162px; padding:20px 18px 16px}
+  .pk-t{font-size:1.04rem}
+  /* la chaîne disparaît ici : la distinction passe par une pastille */
+  .pk-body::before{
+    content:"Le piège"; align-self:flex-start; margin-bottom:12px; padding:4px 9px;
+    font-family:var(--f-mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase;
+    background:var(--red-deep); color:#FBF7EF;
+  }
+  .pk-card.exit .pk-body::before{content:"La sortie"; background:var(--green)}
 }
-@media(max-width:560px){ .pk-row{grid-template-columns:1fr} }
+@media(max-width:560px){
+  .pk-row{grid-template-columns:1fr; gap:30px}
+  .pk-body{min-height:0; padding:22px 20px 18px}
+  .pk-t{font-size:1.2rem}
+  .pk-tab{min-width:104px}
+}
 
 /* ---------- overlay de fiche ---------- */
 .fiche-modal{
@@ -230,7 +245,7 @@ html.modal-ouvert{overflow:hidden}
 /* ---------- feuille de document ---------- */
 .sheet{
   position:relative; background:var(--paper); color:var(--ink);
-  padding:56px 52px 52px 78px; box-shadow:var(--sheet-shadow);
+  padding:42px 52px 48px 78px; box-shadow:var(--sheet-shadow);
   border:1px solid rgba(30,58,76,.12);
 }
 .sheet::before{
@@ -242,7 +257,7 @@ html.modal-ouvert{overflow:hidden}
   background-size:10px 74px; background-repeat:repeat-y;
 }
 @media(max-width:640px){
-  .sheet{padding:36px 22px 36px 44px}
+  .sheet{padding:26px 20px 30px 42px}
   .sheet::before{left:22px} .sheet::after{left:6px}
 }
 .sheet-head{
@@ -550,7 +565,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
 </section>
 
 <!-- ============ PRÉSENTATION ============ -->
-<section id="synthese" style="padding-top:20px">
+<section id="synthese" style="padding-top:0">
   <div class="wrap">
     <article class="sheet rv">
       <div class="sheet-head">
@@ -962,12 +977,14 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
      du focus à l'élément déclencheur. On ajoute le verrou de défilement,
      la fermeture au clic sur le fond et la synchronisation avec le hash. */
   var declencheur = null;
+  var ouvertA = 0;
 
   function ouvrir(id, majHash){
     var d = document.getElementById(id);
     if(!d || typeof d.showModal !== 'function') return false;
     document.querySelectorAll('dialog[open]').forEach(function(o){ if(o !== d) o.close(); });
     if(!d.open) d.showModal();
+    ouvertA = performance.now();
     document.documentElement.classList.add('modal-ouvert');
     // le navigateur peut recaler le défilement après l'ouverture : on remet en tête à la frame suivante
     var zone = d.querySelector('.modal-scroll');
@@ -976,7 +993,10 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     if(majHash !== false && location.hash.slice(1) !== id) history.replaceState(null,'','#'+id);
     return true;
   }
-  function fermer(d){ if(d && d.open) d.close(); }
+  function fermer(d, geste){
+    if(geste && performance.now() - ouvertA < 400) return;
+    if(d && d.open) d.close();
+  }
 
   document.querySelectorAll('dialog.fiche-modal').forEach(function(d){
     d.addEventListener('close', function(){
@@ -987,8 +1007,8 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
       }
     });
     // clic sur le fond : le <dialog> reçoit l'événement hors de son contenu
-    d.addEventListener('click', function(e){ if(e.target === d) fermer(d); });
-    d.querySelector('[data-close]').addEventListener('click', function(){ fermer(d); });
+    d.addEventListener('click', function(e){ if(e.target === d) fermer(d, true); });
+    d.querySelector('[data-close]').addEventListener('click', function(){ fermer(d, true); });
     d.querySelectorAll('[data-goto]').forEach(function(a){
       a.addEventListener('click', function(e){ e.preventDefault(); ouvrir(a.dataset.goto); });
     });
