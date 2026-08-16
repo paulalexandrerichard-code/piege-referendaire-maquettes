@@ -80,11 +80,22 @@ section{padding:104px 0}
 }
 .l-stamp{right:7%; top:17%; width:min(268px,26vw); transform:rotate(-12deg); opacity:.85}
 @media(max-width:900px){
-  .hero-layers{display:none}          /* la chemise passait sous le texte : on la retire */
   .hero{padding:30px 0 22px}
   .eyebrow{letter-spacing:.24em; margin-bottom:14px}
   .hero-sub{margin-top:20px}
 }
+/* tablette : la chemise revient, réduite, avec un texte qui lui laisse la place */
+@media(min-width:621px) and (max-width:900px){
+  .hero h1{font-size:clamp(2.6rem,7.2vw,5.2rem)}
+  .hero-sub{max-width:40ch}
+  .eyebrow{max-width:56ch}
+  .l-folder{right:0; top:9%; bottom:10%; width:min(292px,38vw)}
+  .l-sheet{right:3.5%; top:17%; bottom:18%; width:min(214px,28vw)}
+  .l-sheet2{right:1.5%; top:21%; bottom:14%; width:min(196px,25vw)}
+  .l-stamp{right:2%; top:15%; width:min(196px,26vw)}
+}
+/* téléphone : la chemise encombre et passe sous le texte */
+@media(max-width:620px){ .hero-layers{display:none} }
 .hero-inner{position:relative; z-index:2; width:100%}
 .eyebrow{
   font-family:var(--f-mono); font-size:12px; letter-spacing:.34em; text-transform:uppercase;
@@ -130,7 +141,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
 /* les chemises */
 .pk-row{display:grid; grid-template-columns:repeat(4,1fr); gap:26px; align-items:stretch}
 .pk-card{
-  position:relative; display:block; margin-top:26px; text-decoration:none;
+  position:relative; display:flex; flex-direction:column; margin-top:26px; text-decoration:none;
   transition:transform .2s ease;
 }
 .pk-tab{
@@ -143,7 +154,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
   color:#241E14;
 }
 .pk-body{
-  position:relative; display:flex; flex-direction:column; min-height:184px;
+  position:relative; display:flex; flex-direction:column; flex:1 1 auto; min-height:184px;
   background:linear-gradient(168deg,#D6C39A,#BFA97C); color:#241E14;
   border:1px solid rgba(30,58,76,.22);
   padding:24px 20px 18px; 
@@ -176,24 +187,21 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .pk-caps .trap{grid-column:1 / span 3; color:var(--red-deep)}
 .pk-caps .exit{grid-column:4; color:var(--green)}
 
-/* tablette : deux colonnes, la chaîne n'a plus de grille à suivre */
+/* tablette : on garde les quatre colonnes et la chaîne, resserrées */
 @media(max-width:900px){
-  .pk-chain,.pk-caps{display:none}
-  .pk-row{grid-template-columns:repeat(2,1fr); gap:30px 20px}
-  .pk-card{margin-top:24px}
-  .pk-body{min-height:170px; padding:22px 20px 18px; box-shadow:0 14px 24px -20px rgba(30,58,76,.75)}
-  .pk-t{font-size:1.1rem}
-  .pk-tab{min-width:104px}
-  .pk-body::before{
-    content:"Le piège"; align-self:flex-start; margin-bottom:12px; padding:4px 9px;
-    font-family:var(--f-mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase;
-    background:var(--red-deep); color:#FBF7EF;
-  }
-  .pk-card.exit .pk-body::before{content:"La sortie"; background:var(--green)}
+  .wrap{padding:0 18px}
+  .pk-chain{gap:14px}
+  .pk-caps{gap:14px}
+  .pk-row{grid-template-columns:repeat(4,1fr); gap:14px}
+  .pk-card{margin-top:22px}
+  .pk-body{min-height:0; padding:16px 13px 13px; box-shadow:0 14px 24px -20px rgba(30,58,76,.75)}
+  .pk-t{font-size:.94rem; line-height:1.1}
+  .pk-tab{min-width:0; padding:6px 16px 7px 11px; font-size:9.5px; letter-spacing:.14em}
+  .pk-go{font-size:9px; letter-spacing:.14em; padding-top:14px}
 }
 
 /* téléphone : colonne unique, la chaîne bascule à la verticale en rail à gauche */
-@media(max-width:560px){
+@media(max-width:620px){
   .pk-row{grid-template-columns:1fr; gap:30px; position:relative; padding-left:54px}
   .pk-row::before{
     content:""; position:absolute; left:21px; width:2px; background:var(--red-deep);
@@ -212,8 +220,7 @@ h1 .l2{display:block; color:var(--blue-deep)}
     font-family:var(--f-mono); font-size:10px; box-shadow:0 0 0 5px var(--pale);
   }
   .pk-card.exit::before{background:var(--green)}
-  .pk-body{min-height:0}
-  .pk-body::before{display:none}   /* le rail dit déjà piège et sortie */
+  .pk-body{min-height:0; padding:22px 20px 18px}
   .pk-t{font-size:1.14rem}
 }
 
@@ -1057,7 +1064,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
   function rail(){
     var row = document.querySelector('.pk-row');
     if(!row) return;
-    if(innerWidth > 560){ ['--rail-top','--rail-h','--break-top','--break-h'].forEach(function(v){ row.style.removeProperty(v); }); return; }
+    if(innerWidth > 620){ ['--rail-top','--rail-h','--break-top','--break-h'].forEach(function(v){ row.style.removeProperty(v); }); return; }
     var haut = row.getBoundingClientRect().top;
     var c = [].map.call(row.querySelectorAll('.pk-card'), function(el){
       var r = el.getBoundingClientRect(); return r.top - haut + r.height/2;
