@@ -176,21 +176,35 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .pk-caps .trap{grid-column:1 / span 3; color:var(--red-deep)}
 .pk-caps .exit{grid-column:4; color:var(--green)}
 
-/* sous 900 px la chaîne bascule à la verticale, en rail à gauche */
+/* tablette : deux colonnes, la chaîne n'a plus de grille à suivre */
 @media(max-width:900px){
   .pk-chain,.pk-caps{display:none}
+  .pk-row{grid-template-columns:repeat(2,1fr); gap:30px 20px}
+  .pk-card{margin-top:24px}
+  .pk-body{min-height:170px; padding:22px 20px 18px; box-shadow:0 14px 24px -20px rgba(30,58,76,.75)}
+  .pk-t{font-size:1.1rem}
+  .pk-tab{min-width:104px}
+  .pk-body::before{
+    content:"Le piège"; align-self:flex-start; margin-bottom:12px; padding:4px 9px;
+    font-family:var(--f-mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase;
+    background:var(--red-deep); color:#FBF7EF;
+  }
+  .pk-card.exit .pk-body::before{content:"La sortie"; background:var(--green)}
+}
+
+/* téléphone : colonne unique, la chaîne bascule à la verticale en rail à gauche */
+@media(max-width:560px){
   .pk-row{grid-template-columns:1fr; gap:30px; position:relative; padding-left:54px}
-  .pk-row::before{                       /* filet rouge, du 01 au 03 */
+  .pk-row::before{
     content:""; position:absolute; left:21px; width:2px; background:var(--red-deep);
     top:var(--rail-top,0); height:var(--rail-h,0);
   }
-  .pk-row::after{                        /* la rupture, avant le 04 */
+  .pk-row::after{
     content:""; position:absolute; left:14px; width:16px;
     top:var(--break-top,0); height:var(--break-h,0);
     background:repeating-linear-gradient(160deg, transparent 0 5px, rgba(30,58,76,.45) 5px 7px);
   }
-  .pk-card{margin-top:24px}
-  .pk-card::before{                      /* la pastille numérotée */
+  .pk-card::before{
     content:attr(data-n); position:absolute; left:-46px; top:50%; transform:translateY(-50%);
     width:28px; height:28px; border-radius:50%; z-index:2;
     background:var(--red-deep); color:#FBF7EF;
@@ -198,9 +212,9 @@ h1 .l2{display:block; color:var(--blue-deep)}
     font-family:var(--f-mono); font-size:10px; box-shadow:0 0 0 5px var(--pale);
   }
   .pk-card.exit::before{background:var(--green)}
-  .pk-body{min-height:0; padding:22px 20px 18px; box-shadow:0 14px 24px -20px rgba(30,58,76,.75)}
+  .pk-body{min-height:0}
+  .pk-body::before{display:none}   /* le rail dit déjà piège et sortie */
   .pk-t{font-size:1.14rem}
-  .pk-tab{min-width:104px}
 }
 
 /* ---------- overlay de fiche ---------- */
@@ -1043,7 +1057,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
   function rail(){
     var row = document.querySelector('.pk-row');
     if(!row) return;
-    if(innerWidth > 900){ ['--rail-top','--rail-h','--break-top','--break-h'].forEach(function(v){ row.style.removeProperty(v); }); return; }
+    if(innerWidth > 560){ ['--rail-top','--rail-h','--break-top','--break-h'].forEach(function(v){ row.style.removeProperty(v); }); return; }
     var haut = row.getBoundingClientRect().top;
     var c = [].map.call(row.querySelectorAll('.pk-card'), function(el){
       var r = el.getBoundingClientRect(); return r.top - haut + r.height/2;
