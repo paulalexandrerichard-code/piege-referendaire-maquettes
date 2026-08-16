@@ -176,24 +176,30 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .pk-caps .trap{grid-column:1 / span 3; color:var(--red-deep)}
 .pk-caps .exit{grid-column:4; color:var(--green)}
 
+/* sous 900 px la chaîne bascule à la verticale, en rail à gauche */
 @media(max-width:900px){
   .pk-chain,.pk-caps{display:none}
-  .pk-row{grid-template-columns:repeat(2,1fr); gap:26px 16px}
-  .pk-card{margin-top:24px}
-  .pk-body{min-height:162px; padding:20px 18px 16px}
-  .pk-t{font-size:1.04rem}
-  /* la chaîne disparaît ici : la distinction passe par une pastille */
-  .pk-body::before{
-    content:"Le piège"; align-self:flex-start; margin-bottom:12px; padding:4px 9px;
-    font-family:var(--f-mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase;
-    background:var(--red-deep); color:#FBF7EF;
+  .pk-row{grid-template-columns:1fr; gap:30px; position:relative; padding-left:54px}
+  .pk-row::before{                       /* filet rouge, du 01 au 03 */
+    content:""; position:absolute; left:21px; width:2px; background:var(--red-deep);
+    top:var(--rail-top,0); height:var(--rail-h,0);
   }
-  .pk-card.exit .pk-body::before{content:"La sortie"; background:var(--green)}
-}
-@media(max-width:560px){
-  .pk-row{grid-template-columns:1fr; gap:30px}
-  .pk-body{min-height:0; padding:22px 20px 18px}
-  .pk-t{font-size:1.2rem}
+  .pk-row::after{                        /* la rupture, avant le 04 */
+    content:""; position:absolute; left:14px; width:16px;
+    top:var(--break-top,0); height:var(--break-h,0);
+    background:repeating-linear-gradient(160deg, transparent 0 5px, rgba(30,58,76,.45) 5px 7px);
+  }
+  .pk-card{margin-top:24px}
+  .pk-card::before{                      /* la pastille numérotée */
+    content:attr(data-n); position:absolute; left:-46px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; border-radius:50%; z-index:2;
+    background:var(--red-deep); color:#FBF7EF;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--f-mono); font-size:10px; box-shadow:0 0 0 5px var(--pale);
+  }
+  .pk-card.exit::before{background:var(--green)}
+  .pk-body{min-height:0; padding:22px 20px 18px; box-shadow:0 14px 24px -20px rgba(30,58,76,.75)}
+  .pk-t{font-size:1.14rem}
   .pk-tab{min-width:104px}
 }
 
@@ -530,28 +536,28 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     </div>
 
     <div class="pk-row">
-      <a class="pk-card" href="#fiche-1">
+      <a class="pk-card" data-n="01" href="#fiche-1">
         <span class="pk-tab">Fiche 01</span>
         <span class="pk-body">
           <span class="pk-t">Le référendum, une voie suggérée par les mandarins de P. E. Trudeau</span>
           <span class="pk-go">Ouvrir →</span>
         </span>
       </a>
-      <a class="pk-card" href="#fiche-2">
+      <a class="pk-card" data-n="02" href="#fiche-2">
         <span class="pk-tab">Fiche 02</span>
         <span class="pk-body">
           <span class="pk-t">Un référendum qui repose sur la bonne foi du fédéral</span>
           <span class="pk-go">Ouvrir →</span>
         </span>
       </a>
-      <a class="pk-card" href="#fiche-3">
+      <a class="pk-card" data-n="03" href="#fiche-3">
         <span class="pk-tab">Fiche 03</span>
         <span class="pk-body">
           <span class="pk-t">Les conséquences néfastes sur l'intérêt national</span>
           <span class="pk-go">Ouvrir →</span>
         </span>
       </a>
-      <a class="pk-card exit" href="#fiche-4">
+      <a class="pk-card exit" data-n="04" href="#fiche-4">
         <span class="pk-tab">Fiche 04</span>
         <span class="pk-body">
           <span class="pk-t">Sortie du piège : la première voie</span>
@@ -1032,6 +1038,25 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
   addEventListener('hashchange', function(){
     if(location.hash.indexOf('#fiche-') === 0) ouvrir(location.hash.slice(1), false);
   });
+
+  // le rail vertical se cale sur la position réelle des chemises
+  function rail(){
+    var row = document.querySelector('.pk-row');
+    if(!row) return;
+    if(innerWidth > 900){ ['--rail-top','--rail-h','--break-top','--break-h'].forEach(function(v){ row.style.removeProperty(v); }); return; }
+    var haut = row.getBoundingClientRect().top;
+    var c = [].map.call(row.querySelectorAll('.pk-card'), function(el){
+      var r = el.getBoundingClientRect(); return r.top - haut + r.height/2;
+    });
+    if(c.length < 4) return;
+    row.style.setProperty('--rail-top', c[0]+'px');
+    row.style.setProperty('--rail-h', (c[2]-c[0])+'px');
+    row.style.setProperty('--break-top', (c[2]+18)+'px');
+    row.style.setProperty('--break-h', Math.max(0,(c[3]-c[2]-36))+'px');
+  }
+  rail();
+  addEventListener('resize', rail);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(rail);
 
   document.querySelectorAll('[data-acc]').forEach(function(btn){
     btn.addEventListener('click', function(){
