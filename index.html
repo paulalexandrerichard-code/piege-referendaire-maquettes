@@ -8,7 +8,9 @@
 <title>Le Piège Référendaire — Maquette de direction artistique</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{
   /* surface */
@@ -398,7 +400,26 @@ h2{
 .pv-quote p{margin:0 0 10px; max-width:none; font-size:1.18rem; line-height:1.42; font-style:italic; color:var(--ink)}
 .pv-quote cite{font-style:normal; font-family:var(--f-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#5d6b73}
 .pv-frame{position:relative; aspect-ratio:16/9; background:#000; border-top:1px solid rgba(30,58,76,.2)}
-.pv-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
+.pv-facade{position:absolute; inset:0; display:block; cursor:pointer}
+.pv-thumb{
+  position:absolute; inset:0;
+  background:url('https://i.ytimg.com/vi/p54qjEjQpwM/hqdefault.jpg') center/cover;
+  filter:grayscale(.3) contrast(1.05);
+}
+.pv-playbtn{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:64px; height:64px; border-radius:50%; background:rgba(110,21,18,.88);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  transition:transform .2s ease, background .2s ease;
+}
+.pv-playbtn::before{
+  content:""; width:0; height:0; margin-left:4px;
+  border-style:solid; border-width:12px 0 12px 20px; border-color:transparent transparent transparent #FBF7EF;
+}
+.pv-facade:hover .pv-playbtn,.pv-facade:focus-visible .pv-playbtn{
+  transform:translate(-50%,-50%) scale(1.08); background:var(--red-deep);
+}
 .pv-cap{
   display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
   padding:11px 16px; border-top:1px solid rgba(30,58,76,.16);
@@ -680,12 +701,10 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
           <cite>Jean-François Lisée</cite>
         </blockquote>
         <div class="pv-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/p54qjEjQpwM?start=2484&amp;hl=fr"
-            title="Faire reconnaître un référendum gagnant — Jean-François Lisée"
-            loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+          <a class="pv-facade" href="#video-modal" data-video-trigger aria-label="Lire l'extrait vidéo : Jean-François Lisée sur l'effectivité de la souveraineté">
+            <span class="pv-thumb"></span>
+            <span class="pv-playbtn" aria-hidden="true"></span>
+          </a>
         </div>
         <figcaption class="pv-cap">
           <span>Faire reconnaître un référendum gagnant — extrait à 41 min 24 s</span>
@@ -1290,8 +1309,8 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     });
   });
 
-  // la pièce vidéo du hero ouvre le même overlay que les fiches
-  document.querySelectorAll('.hero-video-link').forEach(function(a){
+  // toute pièce vidéo (hero, note de synthèse…) ouvre le même overlay que les fiches
+  document.querySelectorAll('.hero-video-link, [data-video-trigger]').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault(); declencheur = a; ouvrir('video-modal');
     });
