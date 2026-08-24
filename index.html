@@ -163,12 +163,12 @@ h1 .l2{display:block; color:var(--blue-deep)}
 }
 
 /* ---------- rangée de pochettes ---------- */
-.pochettes{padding:5px 0 26px}
+.pochettes{padding:19px 0 26px}
 
 /* la ligne : chaîne rouge 01-02-03, rupture, puis 04 */
 .pk-chain{
   position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:26px;
-  align-items:center; height:28px; margin-bottom:33px;
+  align-items:center; height:28px; margin-bottom:19px;
 }
 .pk-chain::before{
   content:""; position:absolute; top:50%; left:12.5%; right:37.5%;
@@ -556,18 +556,13 @@ blockquote.doc p:last-of-type{margin-bottom:0}
 footer{background:var(--blue-deep); color:rgba(231,238,243,.78); padding:64px 0 84px}
 footer h2{color:#F1F5F7; margin-bottom:34px}
 footer .cols{
-  display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,auto);
-  grid-auto-flow:column; column-gap:60px; row-gap:38px;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  column-gap:40px; row-gap:38px;
 }
 footer .cols > div{break-inside:avoid; page-break-inside:avoid}
-@media(max-width:760px){
-  footer .cols{grid-template-columns:1fr; grid-auto-flow:row}
-  footer .cols > div:nth-child(1){order:1}
-  footer .cols > div:nth-child(2){order:3}
-  footer .cols > div:nth-child(3){order:5}
-  footer .cols > div:nth-child(4){order:2}
-  footer .cols > div:nth-child(5){order:4}
-}
+footer .col-stack{display:flex; flex-direction:column; gap:38px}
+@media(max-width:1000px){ footer .cols{grid-template-columns:1fr 1fr; column-gap:50px} }
+@media(max-width:600px){ footer .cols{grid-template-columns:1fr} }
 footer h4{color:var(--kraft); margin:0 0 14px}
 footer ul{margin:0; padding:0; list-style:none; font-size:14.5px; line-height:1.7}
 footer li{margin-bottom:12px; padding-left:16px; position:relative}
@@ -1171,11 +1166,33 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
   <div class="wrap">
     <h2>Sources et pièces</h2>
     <div class="cols">
+      <div class="col-stack">
+        <div>
+          <h4>Fiche 01 — Origine de la stratégie</h4>
+          <ul>
+            <li>Claude Morin, <em>Mes premiers ministres</em>, p. 482-485</li>
+            <li>Claude Morin, <em>L'affaire Morin</em>, p. 201-205</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Textes juridiques</h4>
+          <ul>
+            <li>Loi constitutionnelle de 1982</li>
+            <li>Renvoi relatif à la sécession du Québec, 1998</li>
+            <li>Loi sur la clarté, 2000</li>
+          </ul>
+        </div>
+      </div>
       <div>
-        <h4>Fiche 01 — Origine de la stratégie</h4>
+        <h4>Fiche 02 — Bonne foi du fédéral</h4>
         <ul>
-          <li>Claude Morin, <em>Mes premiers ministres</em>, p. 482-485</li>
-          <li>Claude Morin, <em>L'affaire Morin</em>, p. 201-205</li>
+          <li>Jean-Jacques Chevallier, <em>Les grandes œuvres politiques, de Machiavel à nos jours</em>, Librairie Armand Colin</li>
+          <li>John Starnes, <em>Closely Guarded: A Life in Canadian Security and Intelligence</em>, p. 143-144 et appendice</li>
+          <li>« The FAN TAN file: Quebec separatism and security service resistance to politicization 1971–72 », <em>Intelligence and National Security</em>, 2023 — <a href="https://www.tandfonline.com/doi/full/10.1080/02684527.2023.2246235" target="_blank" rel="noopener">tandfonline.com</a></li>
+          <li><em>The Globe and Mail</em>, « Pierre Trudeau's office ran secret intelligence unit to quell separatist movement in Quebec » — <a href="https://www.theglobeandmail.com/canada/article-quebec-separatists-intelligence-unit-pmo/" target="_blank" rel="noopener">theglobeandmail.com</a></li>
+          <li><em>Journal de Montréal</em>, « La réalité a rattrapé les fictions de Denys Arcand », 11 mars 2021 — <a href="https://www.journaldemontreal.com/2021/03/11/la-realite-a-rattrape-les-fictions-de-denys-arcand" target="_blank" rel="noopener">journaldemontreal.com</a></li>
+          <li>IRAI Québec</li>
+          <li>Commissions d'enquête Keable et McDonald</li>
         </ul>
       </div>
       <div>
@@ -1190,26 +1207,6 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
           <li><em>National Post</em>, Bob Plamondon, 31 octobre 2017</li>
           <li><em>Le Devoir</em>, « Ottawa a étudié des scénarios sur la partition du Québec »</li>
           <li>Environics Institute for Survey Research</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Textes juridiques</h4>
-        <ul>
-          <li>Loi constitutionnelle de 1982</li>
-          <li>Renvoi relatif à la sécession du Québec, 1998</li>
-          <li>Loi sur la clarté, 2000</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Fiche 02 — Bonne foi du fédéral</h4>
-        <ul>
-          <li>Jean-Jacques Chevallier, <em>Les grandes œuvres politiques, de Machiavel à nos jours</em>, Librairie Armand Colin</li>
-          <li>John Starnes, <em>Closely Guarded: A Life in Canadian Security and Intelligence</em>, p. 143-144 et appendice</li>
-          <li>« The FAN TAN file: Quebec separatism and security service resistance to politicization 1971–72 », <em>Intelligence and National Security</em>, 2023 — <a href="https://www.tandfonline.com/doi/full/10.1080/02684527.2023.2246235" target="_blank" rel="noopener">tandfonline.com</a></li>
-          <li><em>The Globe and Mail</em>, « Pierre Trudeau's office ran secret intelligence unit to quell separatist movement in Quebec » — <a href="https://www.theglobeandmail.com/canada/article-quebec-separatists-intelligence-unit-pmo/" target="_blank" rel="noopener">theglobeandmail.com</a></li>
-          <li><em>Journal de Montréal</em>, « La réalité a rattrapé les fictions de Denys Arcand », 11 mars 2021 — <a href="https://www.journaldemontreal.com/2021/03/11/la-realite-a-rattrape-les-fictions-de-denys-arcand" target="_blank" rel="noopener">journaldemontreal.com</a></li>
-          <li>IRAI Québec</li>
-          <li>Commissions d'enquête Keable et McDonald</li>
         </ul>
       </div>
       <div>
