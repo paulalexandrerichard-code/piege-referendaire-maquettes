@@ -83,52 +83,19 @@ section{padding:104px 0}
 }
 .l-stamp{right:16%; top:8%; width:min(268px,26vw); transform:rotate(-12deg); opacity:.85; z-index:4}
 
-/* ---------- pièce vidéo du hero : photo témoin clipée, avec la citation Lisée en légende ---------- */
-.hero-video-link{
-  position:absolute; z-index:3; text-decoration:none; pointer-events:auto;
-  right:8%; bottom:6%; width:min(240px,21vw);
-  transform:rotate(-5deg);
-  background:#F7F3E8; padding:12px 12px 14px;
+/* ---------- pièce du hero : la caricature de Trudeau en Prince ---------- */
+/* top+bottom (comme .l-folder) plutôt que largeur+aspect-ratio : la boîte
+   reste proportionnelle à la chemise quelle que soit la hauteur du hero */
+.l-caricature{
+  right:10%; top:19%; bottom:10%; width:min(230px,20vw); margin:0;
+  transform:rotate(-4deg);
+  background:#F7F3E8; padding:8px;
   box-shadow:2px 6px 0 rgba(30,58,76,.12), 0 20px 30px -20px rgba(30,58,76,.6);
-  transition:box-shadow .25s ease, filter .25s ease;
+  box-sizing:border-box;
 }
-.hero-video-link:hover,.hero-video-link:focus-visible{
-  box-shadow:2px 6px 0 rgba(30,58,76,.16), 0 28px 38px -18px rgba(30,58,76,.75);
-  filter:brightness(1.03);
-}
-.hero-video-link .hv-clip{
-  position:absolute; top:-14px; left:50%; width:46px; height:20px; margin-left:-23px;
-  background:rgba(30,58,76,.5); transform:rotate(-3deg);
-  box-shadow:0 2px 4px rgba(0,0,0,.25);
-}
-.hero-video-link .hv-frame{
-  display:block; position:relative; width:100%; aspect-ratio:1/0.8; overflow:hidden;
-}
-.hero-video-link .hv-photo{
-  position:absolute; inset:0;
-  background:url('https://i.ytimg.com/vi/p54qjEjQpwM/hqdefault.jpg') center/cover;
-  filter:grayscale(.6) contrast(1.08) brightness(.96);
-}
-.hero-video-link .hv-play{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:42px; height:42px; border-radius:50%; background:rgba(110,21,18,.88);
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.35);
-}
-.hero-video-link .hv-play::before{
-  content:""; width:0; height:0; margin-left:3px;
-  border-style:solid; border-width:7px 0 7px 12px; border-color:transparent transparent transparent #FBF7EF;
-}
-.hero-video-link .hv-quote{
-  margin:11px 2px 0; font-family:var(--f-read); font-style:italic;
-  font-size:12px; line-height:1.38; color:var(--ink);
-}
-.hero-video-link .hv-cap{
-  margin:7px 2px 0; font-family:var(--f-mono); font-size:8.5px; letter-spacing:.1em;
-  text-transform:uppercase; color:#5d6b73; text-align:right;
-}
-@media(min-width:621px) and (max-width:900px){ .hero-video-link{width:min(168px,23vw); right:6%; bottom:6%} }
-@media(max-width:620px){ .hero-video-link{display:none} }
+.l-caricature picture{display:block; width:100%; height:100%}
+.l-caricature img{display:block; width:100%; height:100%; object-fit:cover; object-position:50% 22%; filter:sepia(.12) contrast(1.03)}
+@media(min-width:621px) and (max-width:900px){ .l-caricature{width:min(160px,22vw); right:6%; top:22%; bottom:10%} }
 
 @media(max-width:900px){
   .hero{padding:30px 0 22px}
@@ -163,6 +130,16 @@ h1 .l2{display:block; color:var(--blue-deep)}
 .hero-sub{
   margin:24px 0 0; max-width:56ch; color:rgba(30,58,76,.86); font-size:1.06rem;
   border-left:2px solid var(--red-deep); padding-left:18px;
+}
+.hero-quote{
+  margin:22px 0 0; padding-left:18px; border-left:2px solid rgba(30,58,76,.35); max-width:52ch;
+}
+.hero-quote p{
+  margin:0; font-style:italic; font-size:1.05rem; line-height:1.5; color:var(--ink);
+}
+.hero-quote cite{
+  display:block; margin-top:8px; font-style:normal; font-family:var(--f-mono); font-size:10.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:#5d6b73;
 }
 
 /* ---------- rangée de pochettes ---------- */
@@ -564,8 +541,8 @@ blockquote.doc p:last-of-type{margin-bottom:0}
 
 /* ---------- clôture ---------- */
 .closing{background:linear-gradient(180deg, transparent, rgba(30,58,76,.09))}
-#conclusion{padding-top:48px}
-@media(max-width:640px){ #conclusion{padding-top:30px} }
+#conclusion{padding-top:18px}
+@media(max-width:640px){ #conclusion{padding-top:12px} }
 .closing-title{margin-bottom:26px; color:var(--blue-deep)}
 .closing p{color:rgba(20,20,15,.84)}
 .closing .q{
@@ -583,7 +560,17 @@ footer .cols{
 }
 footer .cols > div{break-inside:avoid; page-break-inside:avoid}
 footer .col-stack{display:flex; flex-direction:column; gap:38px}
-@media(max-width:1000px){ footer .cols{grid-template-columns:1fr 1fr; column-gap:50px} }
+/* en deçà de 4 colonnes, il n'y a plus de place pour accoler Textes juridiques
+   à Fiche 01 : on déplie le groupe et on le renvoie après les 4 fiches */
+@media(max-width:1000px){
+  footer .cols{grid-template-columns:1fr 1fr; column-gap:50px}
+  footer .col-stack{display:contents}
+  footer .col-stack > div:first-child{order:1}
+  footer .col-stack > div:last-child{order:5}
+  footer .cols > div:nth-child(2){order:2}
+  footer .cols > div:nth-child(3){order:3}
+  footer .cols > div:nth-child(4){order:4}
+}
 @media(max-width:600px){ footer .cols{grid-template-columns:1fr} }
 footer h4{color:var(--kraft); margin:0 0 14px}
 footer ul{margin:0; padding:0; list-style:none; font-size:14.5px; line-height:1.7}
@@ -618,22 +605,22 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
       <text x="150" y="80" text-anchor="middle" fill="#8C1D18" opacity=".9"
         style="font-family:'Barlow Condensed',sans-serif;font-size:50px;font-weight:700;letter-spacing:.04em">DÉCLASSIFIÉ</text>
     </svg>
+    <figure class="layer l-caricature" data-depth="14">
+      <picture>
+        <source srcset="img/le-prince.webp" type="image/webp">
+        <img src="img/le-prince.jpg" alt="" width="520" height="850" loading="lazy" decoding="async">
+      </picture>
+    </figure>
   </div>
-
-  <a class="hero-video-link" href="#video-modal" aria-label="Voir l’extrait vidéo : Jean-François Lisée sur l’effectivité de la souveraineté">
-    <span class="hv-clip" aria-hidden="true"></span>
-    <span class="hv-frame">
-      <span class="hv-photo"></span>
-      <span class="hv-play" aria-hidden="true"></span>
-    </span>
-    <span class="hv-quote">&laquo; La souveraineté sera effective qu'au moment où le Canada dit Oui &raquo;</span>
-    <span class="hv-cap">Jean-François Lisée</span>
-  </a>
 
   <div class="wrap hero-inner">
     <p class="eyebrow">Dossier d'analyse <span>/</span> Pièce maîtresse <span>/</span> Diffusion immédiate</p>
     <h1><span class="l1"><span class="art">Le</span> piège</span><span class="l2">référendaire</span></h1>
     <p class="hero-sub">Regard critique sur la stratégie référendaire et l'effectivité d'un éventuel changement de statut du Québec.</p>
+    <blockquote class="hero-quote">
+      <p>« La souveraineté sera effective qu'au moment où le Canada dit Oui »</p>
+      <cite>Jean-François Lisée</cite>
+    </blockquote>
 
   </div>
 </header>
@@ -1290,6 +1277,11 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     if(!d.open) d.showModal();
     ouvertA = performance.now();
     document.documentElement.classList.add('modal-ouvert');
+    // par défaut showModal() donne le focus au premier élément focusable (souvent
+    // le lien « Fiche suivante » du bandeau), ce qui affiche un anneau de focus
+    // disgracieux sur un simple clic : on ramène le focus sur le contenu.
+    var contenu = d.querySelector('.sheet, .video-modal-frame');
+    if(contenu){ contenu.setAttribute('tabindex','-1'); contenu.focus({preventScroll:true}); }
     // le navigateur peut recaler le défilement après l'ouverture : on remet en tête à la frame suivante
     var zone = d.querySelector('.modal-scroll');
     zone.scrollTop = 0;
@@ -1335,8 +1327,8 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     });
   });
 
-  // toute pièce vidéo (hero, note de synthèse…) ouvre le même overlay que les fiches
-  document.querySelectorAll('.hero-video-link, [data-video-trigger]').forEach(function(a){
+  // toute pièce vidéo (note de synthèse…) ouvre le même overlay que les fiches
+  document.querySelectorAll('[data-video-trigger]').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault(); declencheur = a; ouvrir('video-modal');
     });
