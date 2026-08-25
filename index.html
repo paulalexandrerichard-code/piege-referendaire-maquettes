@@ -7,6 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le Piège Référendaire — Maquette de direction artistique</title>
 <meta name="description" content="Regard critique sur la stratégie référendaire et l'effectivité d'un éventuel changement de statut du Québec, de province à État souverain.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:url" content="https://piegereferendaire.com/">
+<meta property="og:title" content="Le Piège Référendaire">
+<meta property="og:description" content="Regard critique sur la stratégie référendaire et l'effectivité d'un éventuel changement de statut du Québec, de province à État souverain.">
+<meta property="og:image" content="https://piegereferendaire.com/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le Piège Référendaire">
+<meta name="twitter:description" content="Regard critique sur la stratégie référendaire et l'effectivité d'un éventuel changement de statut du Québec, de province à État souverain.">
+<meta name="twitter:image" content="https://piegereferendaire.com/img/og-image.jpg">
 <link rel="preload" as="font" type="font/woff2" href="fonts/source-serif-400.woff2" crossorigin>
 <style>
 @font-face{
@@ -597,7 +609,10 @@ footer .col-stack{display:flex; flex-direction:column; gap:38px}
   footer .cols > div:nth-child(4){order:4}
 }
 @media(max-width:600px){ footer .cols{grid-template-columns:1fr} }
-footer h4{color:var(--kraft); margin:0 0 14px}
+footer h3{
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--kraft); margin:0 0 14px;
+}
 footer ul{margin:0; padding:0; list-style:none; font-size:14.5px; line-height:1.7}
 footer li{margin-bottom:12px; padding-left:16px; position:relative}
 footer li::before{content:"—"; position:absolute; left:0; color:rgba(203,185,147,.6)}
@@ -650,6 +665,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
   </div>
 </header>
 
+<main>
 <!-- ============ POCHETTES ============ -->
 <section class="pochettes" aria-label="Les quatre fiches du dossier">
   <div class="wrap">
@@ -1216,6 +1232,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     <p class="q">Sortir enfin du<br><em>piège référendaire</em></p>
   </div>
 </section>
+</main>
 
 <!-- ============ SOURCES ============ -->
 <footer id="sources">
@@ -1224,14 +1241,14 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
     <div class="cols">
       <div class="col-stack">
         <div>
-          <h4>Fiche 01 — Origine de la stratégie</h4>
+          <h3>Fiche 01 — Origine de la stratégie</h3>
           <ul>
             <li>Claude Morin, <em>Mes premiers ministres</em>, p. 482-485</li>
             <li>Claude Morin, <em>L'affaire Morin</em>, p. 201-205</li>
           </ul>
         </div>
         <div>
-          <h4>Textes juridiques</h4>
+          <h3>Textes juridiques</h3>
           <ul>
             <li>Loi constitutionnelle de 1982</li>
             <li>Renvoi relatif à la sécession du Québec, 1998</li>
@@ -1240,7 +1257,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
         </div>
       </div>
       <div>
-        <h4>Fiche 02 — Bonne foi du fédéral</h4>
+        <h3>Fiche 02 — Bonne foi du fédéral</h3>
         <ul>
           <li>Jean-Jacques Chevallier, <em>Les grandes œuvres politiques, de Machiavel à nos jours</em>, Librairie Armand Colin</li>
           <li>John Starnes, <em>Closely Guarded: A Life in Canadian Security and Intelligence</em>, p. 143-144 et appendice</li>
@@ -1252,7 +1269,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
         </ul>
       </div>
       <div>
-        <h4>Fiche 03 — Conséquences</h4>
+        <h3>Fiche 03 — Conséquences</h3>
         <ul>
           <li>Pierre Godin, <em>René Lévesque, l'homme brisé</em>, Boréal, p. 55</li>
           <li>Daniel Johnson, <em>Égalité ou indépendance</em>, p. 120</li>
@@ -1266,7 +1283,7 @@ footer a:hover,footer a:focus-visible{color:#fff; border-bottom-color:#fff}
         </ul>
       </div>
       <div>
-        <h4>Fiche 04 — La première voie</h4>
+        <h3>Fiche 04 — La première voie</h3>
         <ul>
           <li>Jean-François Lisée — extrait vidéo cité en note de synthèse</li>
           <li>Paul St-Pierre Plamondon, chef du Parti québécois — source exacte à confirmer</li>
